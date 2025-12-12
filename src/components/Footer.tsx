@@ -5,13 +5,13 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <span className="font-display text-2xl text-primary">FORGE</span>
-            <span className="font-display text-2xl text-foreground">FIT</span>
+            <span className="font-display text-2xl text-primary">ATLAS</span>
+            <span className="font-display text-2xl text-foreground">STRENGTH</span>
           </div>
 
           {/* Copyright */}
           <p className="font-body text-sm text-muted-foreground text-center">
-            © 2024 ForgeFit. All rights reserved. Built for champions.
+            © 2024 Atlas Strength & Performance. All rights reserved.
           </p>
 
           {/* Links */}

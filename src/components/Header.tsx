@@ -19,8 +19,8 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2">
-            <span className="font-display text-3xl text-primary">FORGE</span>
-            <span className="font-display text-3xl text-foreground">FIT</span>
+            <span className="font-display text-2xl md:text-3xl text-primary">ATLAS</span>
+            <span className="font-display text-2xl md:text-3xl text-foreground">STRENGTH</span>
           </a>
 
           {/* Desktop Navigation */}
