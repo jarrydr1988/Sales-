@@ -9,7 +9,8 @@ const Header = () => {
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
-    { label: "Contact", href: "#contact" },
+    { label: "Stories", href: "#testimonials" },
+    { label: "Connect", href: "#contact" },
   ];
 
   return (
@@ -28,7 +29,7 @@ const Header = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="font-body text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300"
+                className="font-body text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
               >
                 {link.label}
               </a>
@@ -38,7 +39,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button variant="hero" size="default">
-              Start Training
+              Join Free
             </Button>
           </div>
 
@@ -59,14 +60,14 @@ const Header = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="font-body text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300"
+                  className="font-body text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
               <Button variant="hero" size="lg" className="mt-4">
-                Start Training
+                Join Free
               </Button>
             </div>
           </nav>
