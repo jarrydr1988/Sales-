@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import AtlasLogo from "@/components/AtlasLogo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +11,7 @@ const Header = () => {
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
     { label: "Stories", href: "#testimonials" },
-    { label: "Connect", href: "#contact" },
+    { label: "Contact", href: "#contact" },
   ];
 
   return (
@@ -18,9 +19,12 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <span className="font-display text-2xl md:text-3xl text-primary">ATLAS</span>
-            <span className="font-display text-2xl md:text-3xl text-foreground">STRENGTH</span>
+          <a href="#home" className="flex items-center gap-3">
+            <AtlasLogo className="w-10 h-10 md:w-12 md:h-12" />
+            <div className="flex flex-col leading-none">
+              <span className="font-display text-xl md:text-2xl text-primary">ATLAS</span>
+              <span className="font-display text-xs md:text-sm text-foreground tracking-widest">STRENGTH & PERFORMANCE</span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
