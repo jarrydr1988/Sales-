@@ -1,5 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AtlasLogo from "@/components/AtlasLogo";
 
@@ -7,11 +8,12 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Stories", href: "#testimonials" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "#home", isExternal: false },
+    { label: "About", href: "#about", isExternal: false },
+    { label: "Services", href: "#services", isExternal: false },
+    { label: "Stories", href: "#testimonials", isExternal: false },
+    { label: "Calculator", href: "/macro-calculator", isExternal: true },
+    { label: "Contact", href: "#contact", isExternal: false },
   ];
 
   return (
@@ -29,15 +31,25 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-body text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.isExternal ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="font-body text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="font-body text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           {/* CTA Button */}
@@ -60,16 +72,27 @@ const Header = () => {
         {isMenuOpen && (
           <nav className="md:hidden pt-6 pb-4 animate-fade-in">
             <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="font-body text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.isExternal ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="font-body text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="font-body text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
               <Button variant="hero" size="lg" className="mt-4">
                 Join Free
               </Button>
