@@ -1,4 +1,11 @@
 import { Quote } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -24,6 +31,30 @@ const TestimonialsSection = () => {
     },
   ];
 
+  const firstHalf = testimonials.slice(0, 2);
+  const secondHalf = testimonials.slice(2, 4);
+
+  const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
+    <div className="group relative p-8 md:p-10 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-all duration-500 h-full">
+      <Quote className="w-12 h-12 text-primary/30 mb-6" />
+      <p className="font-body text-lg text-foreground/90 leading-relaxed mb-8">
+        "{testimonial.story}"
+      </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="font-display text-xl text-foreground uppercase">
+            {testimonial.name}
+          </p>
+        </div>
+        <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+          <span className="font-body text-sm font-semibold text-primary uppercase tracking-wider">
+            {testimonial.result}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <section id="testimonials" className="py-24 md:py-32 bg-card">
       <div className="container mx-auto px-6">
@@ -47,36 +78,37 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Testimonials Grid */}
+        {/* Two Carousel Blocks */}
         <div className="grid md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={testimonial.name}
-              className="group relative p-8 md:p-10 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-all duration-500"
-            >
-              {/* Quote Icon */}
-              <Quote className="w-12 h-12 text-primary/30 mb-6" />
-
-              {/* Story */}
-              <p className="font-body text-lg text-foreground/90 leading-relaxed mb-8">
-                "{testimonial.story}"
-              </p>
-
-              {/* Footer */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-display text-xl text-foreground uppercase">
-                    {testimonial.name}
-                  </p>
-                </div>
-                <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                  <span className="font-body text-sm font-semibold text-primary uppercase tracking-wider">
-                    {testimonial.result}
-                  </span>
-                </div>
-              </div>
+          {/* First Carousel */}
+          <Carousel className="w-full">
+            <CarouselContent>
+              {firstHalf.map((testimonial) => (
+                <CarouselItem key={testimonial.name}>
+                  <TestimonialCard testimonial={testimonial} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-2 mt-4">
+              <CarouselPrevious className="static translate-y-0" />
+              <CarouselNext className="static translate-y-0" />
             </div>
-          ))}
+          </Carousel>
+
+          {/* Second Carousel */}
+          <Carousel className="w-full">
+            <CarouselContent>
+              {secondHalf.map((testimonial) => (
+                <CarouselItem key={testimonial.name}>
+                  <TestimonialCard testimonial={testimonial} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-2 mt-4">
+              <CarouselPrevious className="static translate-y-0" />
+              <CarouselNext className="static translate-y-0" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>

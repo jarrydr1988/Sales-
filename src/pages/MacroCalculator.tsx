@@ -130,6 +130,7 @@ const MacroCalculator = () => {
     setIsLoading(true);
 
     try {
+      const ebookUrl = `${window.location.origin}/ebook/macro-guide.pdf`;
       const { data, error } = await supabase.functions.invoke("send-macro-results", {
         body: {
           email,
@@ -139,7 +140,7 @@ const MacroCalculator = () => {
           carbs: results.carbs,
           fats: results.fats,
           goal,
-          // ebookUrl will be added once you upload the PDF
+          ebookUrl,
         },
       });
 
