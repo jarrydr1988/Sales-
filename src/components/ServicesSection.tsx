@@ -1,5 +1,7 @@
 import { Check, User, Users, Monitor } from "lucide-react";
 
+import { Sparkles } from "lucide-react";
+
 const ServicesSection = () => {
   const services = [
     {
@@ -25,6 +27,14 @@ const ServicesSection = () => {
       description: "Get professional coaching from anywhere with customized programs and ongoing support.",
       features: ["Custom training programs", "Video form reviews", "Weekly check-ins", "Nutrition guidance"],
       price: "£250",
+      period: "per month",
+    },
+    {
+      icon: Sparkles,
+      title: "Online Training Community",
+      description: "Join our community with multiple programs to choose from to suit your goals, plus community forums and groups.",
+      features: ["Multiple program options", "Community forums", "Support groups", "Goal-based training"],
+      price: "£25",
       period: "per month",
     },
   ];
@@ -53,7 +63,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
             <div
               key={service.title}
