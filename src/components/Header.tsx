@@ -24,8 +24,8 @@ const Header = () => {
           <a href="#home" className="flex items-center gap-3">
             <AtlasLogo className="w-10 h-10 md:w-12 md:h-12" />
             <div className="flex flex-col leading-none">
-              <span className="font-display text-xl md:text-2xl text-primary">ATLAS</span>
-              <span className="font-display text-xs md:text-sm text-foreground tracking-widest">STRENGTH & PERFORMANCE</span>
+              <span className="font-display text-xl md:text-2xl text-primary">JARRYD ROOS</span>
+              <span className="font-display text-xs md:text-sm text-foreground tracking-widest">PERSONAL TRAINING</span>
             </div>
           </a>
 

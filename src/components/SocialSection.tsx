@@ -1,4 +1,4 @@
-import { Instagram, Youtube, Facebook, Twitter, Mail, ArrowRight } from "lucide-react";
+import { Instagram, Youtube, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -15,30 +15,16 @@ const SocialSection = () => {
     {
       icon: Instagram,
       label: "Instagram",
-      handle: "@atlasstrength",
+      handle: "@jarrydroospt",
       url: "#",
       followers: "45K",
     },
     {
       icon: Youtube,
       label: "YouTube",
-      handle: "Atlas Strength",
+      handle: "Jarryd Roos PT",
       url: "#",
       followers: "120K",
-    },
-    {
-      icon: Facebook,
-      label: "Facebook",
-      handle: "Atlas Strength",
-      url: "#",
-      followers: "30K",
-    },
-    {
-      icon: Twitter,
-      label: "Twitter/X",
-      handle: "@atlasstrength",
-      url: "#",
-      followers: "15K",
     },
   ];
 

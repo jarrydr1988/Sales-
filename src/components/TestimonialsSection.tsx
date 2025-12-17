@@ -35,12 +35,12 @@ const TestimonialsSection = () => {
   const secondHalf = testimonials.slice(2, 4);
 
   const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
-    <div className="group relative p-8 md:p-10 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-all duration-500 h-full">
-      <Quote className="w-12 h-12 text-primary/30 mb-6" />
-      <p className="font-body text-lg text-foreground/90 leading-relaxed mb-8">
+    <div className="group relative p-8 md:p-10 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-all duration-500 h-full min-h-[320px] flex flex-col">
+      <Quote className="w-12 h-12 text-primary/30 mb-6 flex-shrink-0" />
+      <p className="font-body text-lg text-foreground/90 leading-relaxed mb-8 flex-grow">
         "{testimonial.story}"
       </p>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-shrink-0">
         <div>
           <p className="font-display text-xl text-foreground uppercase">
             {testimonial.name}
