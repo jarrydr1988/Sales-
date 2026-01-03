@@ -1,17 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-trainer.jpg";
-import { useState } from "react";
 
 const HeroSection = () => {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle email submission
-    console.log("Email submitted:", email);
-    setEmail("");
-  };
 
   return (
     <section
@@ -56,43 +47,13 @@ const HeroSection = () => {
             tips, workout plans, and nutrition advice delivered to your inbox.
           </p>
 
-          {/* Email Capture Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 animate-fade-in max-w-lg" style={{ animationDelay: "0.5s" }}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              className="flex-1 px-6 py-4 rounded-lg bg-secondary/80 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body text-lg"
-            />
-            <Button variant="hero" size="xl" type="submit">
-              Join Free
+          {/* CTA Button */}
+          <a href="#contact" className="animate-fade-in" style={{ animationDelay: "0.5s" }}>
+            <Button variant="hero" size="xl">
+              Get Started
               <ArrowRight className="ml-2" />
             </Button>
-          </form>
-
-          {/* Stats */}
-          <div className="flex flex-wrap gap-12 mt-16 animate-fade-in" style={{ animationDelay: "0.7s" }}>
-            <div className="text-center">
-              <p className="font-display text-5xl text-primary">500+</p>
-              <p className="font-body text-sm uppercase tracking-wider text-muted-foreground mt-1 font-medium">
-                Clients Transformed
-              </p>
-            </div>
-            <div className="text-center">
-              <p className="font-display text-5xl text-primary">10+</p>
-              <p className="font-body text-sm uppercase tracking-wider text-muted-foreground mt-1 font-medium">
-                Years Experience
-              </p>
-            </div>
-            <div className="text-center">
-              <p className="font-display text-5xl text-primary">98%</p>
-              <p className="font-body text-sm uppercase tracking-wider text-muted-foreground mt-1 font-medium">
-                Success Rate
-              </p>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
 
