@@ -15,8 +15,8 @@ const SocialSection = () => {
     {
       icon: Instagram,
       label: "Instagram",
-      handle: "@jarrydroospt",
-      url: "#",
+      handle: "@jarrydroos_pt",
+      url: "https://www.instagram.com/jarrydroos_pt?igsh=Y3pnY21mOGNhMjJp",
       followers: "45K",
     },
     {
