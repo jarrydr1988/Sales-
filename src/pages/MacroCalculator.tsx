@@ -1,33 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Calculator, Mail, Loader2 } from "lucide-react";
+import { ArrowLeft, Mail, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import AtlasLogo from "@/components/AtlasLogo";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
 type Gender = "male" | "female";
 type Goal = "fat-loss" | "muscle-gain" | "maintain";
 type WeightUnit = "kg" | "lbs";
 type HeightUnit = "cm" | "inches";
 type ActivityLevel = "sedentary" | "somewhat-active" | "active" | "very-active";
-
 interface MacroResults {
   calories: number;
   protein: number;
   carbs: number;
   fats: number;
 }
-
 const MacroCalculator = () => {
   const [gender, setGender] = useState<Gender | "">("");
   const [goal, setGoal] = useState<Goal | "">("");
@@ -41,32 +32,26 @@ const MacroCalculator = () => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
-
   const activityMultipliers: Record<ActivityLevel, number> = {
     sedentary: 1.2,
     "somewhat-active": 1.375,
     active: 1.55,
-    "very-active": 1.725,
+    "very-active": 1.725
   };
-
   const calculateMacros = (): MacroResults | null => {
     if (!gender || !goal || !weight || !height || !age || !activityLevel) {
       return null;
     }
-
     const weightKg = weightUnit === "lbs" ? parseFloat(weight) * 0.453592 : parseFloat(weight);
     const heightCm = heightUnit === "inches" ? parseFloat(height) * 2.54 : parseFloat(height);
     const ageNum = parseFloat(age);
-
     let bmr: number;
     if (gender === "male") {
       bmr = 10 * weightKg + 6.25 * heightCm - 5 * ageNum + 5;
     } else {
       bmr = 10 * weightKg + 6.25 * heightCm - 5 * ageNum - 161;
     }
-
     const tdee = bmr * activityMultipliers[activityLevel];
-
     let calories: number;
     switch (goal) {
       case "fat-loss":
@@ -78,10 +63,8 @@ const MacroCalculator = () => {
       default:
         calories = tdee;
     }
-
     let proteinMultiplier: number;
     let fatPercentage: number;
-
     switch (goal) {
       case "fat-loss":
         proteinMultiplier = 2.2;
@@ -95,43 +78,39 @@ const MacroCalculator = () => {
         proteinMultiplier = 1.8;
         fatPercentage = 0.30;
     }
-
     const protein = Math.round(weightKg * proteinMultiplier);
-    const fats = Math.round((calories * fatPercentage) / 9);
-    const carbCalories = calories - (protein * 4) - (fats * 9);
+    const fats = Math.round(calories * fatPercentage / 9);
+    const carbCalories = calories - protein * 4 - fats * 9;
     const carbs = Math.round(carbCalories / 4);
-
     return {
       calories: Math.round(calories),
       protein,
       carbs,
-      fats,
+      fats
     };
   };
-
   const handleSubmit = async () => {
     if (!email || !name) {
       toast.error("Please enter your name and email");
       return;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error("Please enter a valid email address");
       return;
     }
-
     const results = calculateMacros();
     if (!results) {
       toast.error("Please fill in all fields");
       return;
     }
-
     setIsLoading(true);
-
     try {
       const ebookUrl = `${window.location.origin}/ebook/macro-guide.pdf`;
-      const { data, error } = await supabase.functions.invoke("send-macro-results", {
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke("send-macro-results", {
         body: {
           email,
           name,
@@ -140,12 +119,10 @@ const MacroCalculator = () => {
           carbs: results.carbs,
           fats: results.fats,
           goal,
-          ebookUrl,
-        },
+          ebookUrl
+        }
       });
-
       if (error) throw error;
-
       setEmailSent(true);
       toast.success("Your macro results have been sent to your email!");
     } catch (error: any) {
@@ -155,11 +132,8 @@ const MacroCalculator = () => {
       setIsLoading(false);
     }
   };
-
   const isFormValid = gender && goal && weight && height && age && activityLevel && email && name;
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
         <div className="container mx-auto px-6 py-4">
@@ -187,7 +161,7 @@ const MacroCalculator = () => {
           {/* Intro Section */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
-              <Calculator className="w-10 h-10 text-primary" />
+              
               <h1 className="font-display text-4xl md:text-5xl text-foreground">
                 MACRO <span className="text-primary">CALCULATOR</span>
               </h1>
@@ -211,9 +185,7 @@ const MacroCalculator = () => {
               </ul>
             </div>
 
-            <h3 className="font-display text-xl md:text-2xl text-primary mb-6">
-              Get Your Personal Macro Breakdown — Free
-            </h3>
+            <h3 className="font-display text-xl md:text-2xl text-primary mb-6">Get Your Personal Macro Breakdown Free!</h3>
 
             <div className="text-left max-w-lg mx-auto mb-6">
               <p className="text-muted-foreground font-body mb-3">This calculator factors in:</p>
@@ -234,13 +206,12 @@ const MacroCalculator = () => {
             </div>
 
             <p className="text-muted-foreground font-body flex items-center justify-center gap-2">
-              <Mail className="w-5 h-5 text-primary" />
+              
               Your exact macros will be sent straight to your email, along with guidance on how to use them properly.
             </p>
           </div>
 
-          {emailSent ? (
-            <div className="bg-card border border-primary/30 rounded-lg p-8 md:p-12 text-center animate-fade-in">
+          {emailSent ? <div className="bg-card border border-primary/30 rounded-lg p-8 md:p-12 text-center animate-fade-in">
               <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Mail className="w-8 h-8 text-primary" />
               </div>
@@ -250,41 +221,24 @@ const MacroCalculator = () => {
               <p className="text-muted-foreground font-body mb-6">
                 We've sent your personalized macro targets and a free meal ideas ebook to <strong className="text-foreground">{email}</strong>
               </p>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setEmailSent(false);
-                  setEmail("");
-                  setName("");
-                }}
-              >
+              <Button variant="outline" onClick={() => {
+            setEmailSent(false);
+            setEmail("");
+            setName("");
+          }}>
                 Calculate Again
               </Button>
-            </div>
-          ) : (
-            <div className="bg-card border border-border rounded-lg p-6 md:p-8 space-y-6">
+            </div> : <div className="bg-card border border-border rounded-lg p-6 md:p-8 space-y-6">
               {/* Name */}
               <div className="space-y-2">
                 <Label className="text-foreground font-display tracking-wider">Your Name</Label>
-                <Input
-                  type="text"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-background border-border"
-                />
+                <Input type="text" placeholder="Enter your name" value={name} onChange={e => setName(e.target.value)} className="bg-background border-border" />
               </div>
 
               {/* Email */}
               <div className="space-y-2">
                 <Label className="text-foreground font-display tracking-wider">Email Address</Label>
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-background border-border"
-                />
+                <Input type="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} className="bg-background border-border" />
                 <p className="text-xs text-muted-foreground">
                   We'll send your results + a free meal ideas ebook to this email
                 </p>
@@ -307,13 +261,7 @@ const MacroCalculator = () => {
               {/* Age */}
               <div className="space-y-2">
                 <Label className="text-foreground font-display tracking-wider">Age</Label>
-                <Input
-                  type="number"
-                  placeholder="Enter your age"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  className="bg-background border-border"
-                />
+                <Input type="number" placeholder="Enter your age" value={age} onChange={e => setAge(e.target.value)} className="bg-background border-border" />
               </div>
 
               {/* Goal Selection */}
@@ -335,13 +283,7 @@ const MacroCalculator = () => {
               <div className="space-y-2">
                 <Label className="text-foreground font-display tracking-wider">Body Weight</Label>
                 <div className="flex gap-3">
-                  <Input
-                    type="number"
-                    placeholder={`Weight in ${weightUnit}`}
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                    className="bg-background border-border flex-1"
-                  />
+                  <Input type="number" placeholder={`Weight in ${weightUnit}`} value={weight} onChange={e => setWeight(e.target.value)} className="bg-background border-border flex-1" />
                   <Select value={weightUnit} onValueChange={(value: WeightUnit) => setWeightUnit(value)}>
                     <SelectTrigger className="bg-background border-border w-24">
                       <SelectValue />
@@ -358,13 +300,7 @@ const MacroCalculator = () => {
               <div className="space-y-2">
                 <Label className="text-foreground font-display tracking-wider">Height</Label>
                 <div className="flex gap-3">
-                  <Input
-                    type="number"
-                    placeholder={`Height in ${heightUnit}`}
-                    value={height}
-                    onChange={(e) => setHeight(e.target.value)}
-                    className="bg-background border-border flex-1"
-                  />
+                  <Input type="number" placeholder={`Height in ${heightUnit}`} value={height} onChange={e => setHeight(e.target.value)} className="bg-background border-border flex-1" />
                   <Select value={heightUnit} onValueChange={(value: HeightUnit) => setHeightUnit(value)}>
                     <SelectTrigger className="bg-background border-border w-28">
                       <SelectValue />
@@ -394,24 +330,14 @@ const MacroCalculator = () => {
               </div>
 
               {/* Calculate Button */}
-              <Button
-                variant="hero"
-                size="xl"
-                className="w-full mt-4 gap-2"
-                onClick={handleSubmit}
-                disabled={!isFormValid || isLoading}
-              >
-                {isLoading ? (
-                  <>
+              <Button variant="hero" size="xl" className="w-full mt-4 gap-2" onClick={handleSubmit} disabled={!isFormValid || isLoading}>
+                {isLoading ? <>
                     <Loader2 className="w-5 h-5 animate-spin" />
                     Sending...
-                  </>
-                ) : (
-                  <>
+                  </> : <>
                     <Mail className="w-5 h-5" />
                     Get My Results
-                  </>
-                )}
+                  </>}
               </Button>
 
               <p className="text-center text-muted-foreground text-xs font-body">
@@ -444,12 +370,9 @@ const MacroCalculator = () => {
                   No spam. No nonsense. Just useful information.
                 </p>
               </div>
-            </div>
-          )}
+            </div>}
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default MacroCalculator;
