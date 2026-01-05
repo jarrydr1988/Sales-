@@ -22,7 +22,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3">
-            <img src={atlasLogo} alt="Atlas Strength & Performance" className="w-[60px] h-[60px] md:w-[72px] md:h-[72px] object-contain" />
+            <img src={atlasLogo} alt="Atlas Strength & Performance" className="w-10 h-10 md:w-12 md:h-12 object-contain" />
             <div className="flex flex-col leading-none">
               <span className="font-display text-xl md:text-2xl text-primary">JARRYD ROOS</span>
               <span className="font-display text-xs md:text-sm text-foreground tracking-widest">PERSONAL TRAINING</span>
