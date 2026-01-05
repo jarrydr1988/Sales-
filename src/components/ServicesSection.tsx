@@ -1,31 +1,33 @@
-import { Check, User, Users, Monitor } from "lucide-react";
-
-import { Sparkles } from "lucide-react";
+import { Check, User, Users, Monitor, Sparkles } from "lucide-react";
 
 const ServicesSection = () => {
   const services = [
     {
       icon: User,
-      title: "1-on-1 Personal Training",
-      description: "Dedicated one-on-one sessions tailored to your individual goals, fitness level, and schedule.",
+      title: "1:1 Personal Training",
+      description: "High-touch coaching for clients who want hands-on guidance, precision programming, and accountability.",
+      bestFor: "Those who want elite results with zero guesswork.",
       features: ["Personalized workout plans", "Full attention & form correction", "Progress tracking", "Flexible scheduling"],
       price: "£150",
       period: "per session",
     },
     {
       icon: Users,
-      title: "2-on-1 Personal Training",
-      description: "Train with a partner or friend and share the motivation while receiving expert guidance.",
-      features: ["Partner accountability", "Shared session cost", "Competitive motivation", "Social fitness experience"],
+      title: "Hybrid Coaching",
+      subtitle: "In-Person + Remote",
+      description: "Structured training and nutrition with flexibility around your schedule.",
+      bestFor: "Busy professionals who travel or train independently some days.",
+      features: ["In-person sessions", "Remote support", "Nutrition guidance", "Flexible scheduling"],
       price: "£210",
       period: "per session",
       featured: true,
     },
     {
       icon: Monitor,
-      title: "Online Personal Training",
-      description: "Get professional coaching from anywhere with customized programs and ongoing support.",
-      features: ["Custom training programs", "Video form reviews", "Weekly check-ins", "Nutrition guidance"],
+      title: "Online Coaching",
+      description: "Data-driven programming, macro targets, and weekly check-ins — wherever you are.",
+      bestFor: "Self-motivated clients who still want expert oversight.",
+      features: ["Custom training programs", "Macro targets", "Weekly check-ins", "Data-driven approach"],
       price: "£250",
       period: "per month",
     },
@@ -33,6 +35,7 @@ const ServicesSection = () => {
       icon: Sparkles,
       title: "Online Training Community",
       description: "Join our community with multiple programs to choose from to suit your goals, plus community forums and groups.",
+      bestFor: "Those looking for affordable guided training with community support.",
       features: ["Multiple program options", "Community forums", "Support groups", "Goal-based training"],
       price: "£25",
       period: "per month",
@@ -51,15 +54,10 @@ const ServicesSection = () => {
           </div>
 
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 uppercase">
-            Choose Your
+            How I Help You
             <br />
-            <span className="text-gradient">Training Style</span>
+            <span className="text-gradient">Get Results</span>
           </h2>
-
-          <p className="font-body text-lg text-muted-foreground">
-            Whether you prefer in-person coaching or remote guidance, 
-            I have a training option that fits your lifestyle.
-          </p>
         </div>
 
         {/* Services Grid */}
@@ -90,14 +88,23 @@ const ServicesSection = () => {
               </div>
 
               {/* Title */}
-              <h3 className="font-display text-2xl text-foreground mb-3 uppercase">
+              <h3 className="font-display text-2xl text-foreground mb-1 uppercase">
                 {service.title}
               </h3>
+              {service.subtitle && (
+                <p className="font-body text-sm text-primary mb-3">{service.subtitle}</p>
+              )}
 
               {/* Description */}
-              <p className="font-body text-sm text-muted-foreground mb-6 leading-relaxed">
+              <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed">
                 {service.description}
               </p>
+
+              {/* Best For */}
+              <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10">
+                <span className="font-body text-xs uppercase tracking-wider text-primary font-semibold">Best for:</span>
+                <p className="font-body text-sm text-muted-foreground mt-1">{service.bestFor}</p>
+              </div>
 
               {/* Price */}
               <div className="mb-6 pb-6 border-b border-border">
