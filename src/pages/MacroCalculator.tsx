@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import AtlasLogo from "@/components/AtlasLogo";
+import MacroNutritionContent from "@/components/MacroNutritionContent";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 type Gender = "male" | "female";
@@ -20,6 +21,7 @@ interface MacroResults {
   fats: number;
 }
 const MacroCalculator = () => {
+  const calculatorRef = useRef<HTMLDivElement>(null);
   const [gender, setGender] = useState<Gender | "">("");
   const [goal, setGoal] = useState<Goal | "">("");
   const [weight, setWeight] = useState("");
@@ -32,6 +34,11 @@ const MacroCalculator = () => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+
+  const scrollToCalculator = () => {
+    calculatorRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const activityMultipliers: Record<ActivityLevel, number> = {
     sedentary: 1.2,
     "somewhat-active": 1.375,
@@ -157,7 +164,7 @@ const MacroCalculator = () => {
 
       {/* Main Content */}
       <main className="pt-32 pb-20 px-6">
-        <div className="container mx-auto max-w-2xl">
+        <div ref={calculatorRef} className="container mx-auto max-w-2xl">
           {/* Intro Section */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -371,6 +378,11 @@ const MacroCalculator = () => {
                 </p>
               </div>
             </div>}
+        </div>
+
+        {/* Nutrition Content Section */}
+        <div className="container mx-auto max-w-4xl mt-16">
+          <MacroNutritionContent onScrollToCalculator={scrollToCalculator} />
         </div>
       </main>
     </div>;
