@@ -2,7 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import AtlasLogo from "@/components/AtlasLogo";
+import atlasLogo from "@/assets/atlas-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3">
-            <AtlasLogo className="w-10 h-10 md:w-12 md:h-12" />
+            <img src={atlasLogo} alt="Atlas Strength & Performance" className="w-10 h-10 md:w-12 md:h-12 object-contain" />
             <div className="flex flex-col leading-none">
               <span className="font-display text-xl md:text-2xl text-primary">JARRYD ROOS</span>
               <span className="font-display text-xs md:text-sm text-foreground tracking-widest">PERSONAL TRAINING</span>
