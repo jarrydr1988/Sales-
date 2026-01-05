@@ -184,6 +184,7 @@ const MacroCalculator = () => {
       {/* Main Content */}
       <main className="pt-32 pb-20 px-6">
         <div className="container mx-auto max-w-2xl">
+          {/* Intro Section */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
               <Calculator className="w-10 h-10 text-primary" />
@@ -191,8 +192,50 @@ const MacroCalculator = () => {
                 MACRO <span className="text-primary">CALCULATOR</span>
               </h1>
             </div>
-            <p className="text-muted-foreground font-body max-w-lg mx-auto">
-              Get personalized macro and calorie targets based on your goals, body composition, and activity level.
+            
+            <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">
+              Not Sure How Much You Should Be Eating?
+            </h2>
+            
+            <div className="text-left max-w-lg mx-auto mb-8">
+              <p className="text-muted-foreground font-body mb-4">Most people are either:</p>
+              <ul className="space-y-2 text-muted-foreground font-body mb-6">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary">•</span>
+                  Eating too much and spinning their wheels
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary">•</span>
+                  Or eating too little and killing their progress
+                </li>
+              </ul>
+            </div>
+
+            <h3 className="font-display text-xl md:text-2xl text-primary mb-6">
+              Get Your Personal Macro Breakdown — Free
+            </h3>
+
+            <div className="text-left max-w-lg mx-auto mb-6">
+              <p className="text-muted-foreground font-body mb-3">This calculator factors in:</p>
+              <ul className="space-y-2 text-muted-foreground font-body">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary">✓</span>
+                  Your body composition
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary">✓</span>
+                  Training frequency
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary">✓</span>
+                  Goals (fat loss, strength, recomposition)
+                </li>
+              </ul>
+            </div>
+
+            <p className="text-muted-foreground font-body flex items-center justify-center gap-2">
+              <Mail className="w-5 h-5 text-primary" />
+              Your exact macros will be sent straight to your email, along with guidance on how to use them properly.
             </p>
           </div>
 
@@ -374,6 +417,33 @@ const MacroCalculator = () => {
               <p className="text-center text-muted-foreground text-xs font-body">
                 By submitting, you'll receive your personalized macro targets and a free meal ideas ebook via email.
               </p>
+
+              {/* Email Benefits Section */}
+              <div className="mt-8 pt-8 border-t border-border">
+                <h4 className="font-display text-lg text-foreground mb-4 text-center">
+                  What You'll Get When You Join the List
+                </h4>
+                <p className="text-muted-foreground font-body text-sm mb-4">
+                  When you enter your email, you'll receive:
+                </p>
+                <ul className="space-y-3 text-muted-foreground font-body text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary">✓</span>
+                    Your personalised macro targets
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary">✓</span>
+                    Training and nutrition insights you can apply immediately
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary">✓</span>
+                    Fat loss and strength strategies for busy schedules
+                  </li>
+                </ul>
+                <p className="text-muted-foreground/70 font-body text-xs mt-4 text-center italic">
+                  No spam. No nonsense. Just useful information.
+                </p>
+              </div>
             </div>
           )}
         </div>
