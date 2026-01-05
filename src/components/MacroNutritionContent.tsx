@@ -4,14 +4,13 @@ import proteinFoods from "@/assets/protein-foods.jpg";
 import carbFoods from "@/assets/carb-foods.jpg";
 import fatFoods from "@/assets/fat-foods.jpg";
 import performanceWheel from "@/assets/performance-wheel.jpg";
-
 interface MacroNutritionContentProps {
   onScrollToCalculator: () => void;
 }
-
-const MacroNutritionContent = ({ onScrollToCalculator }: MacroNutritionContentProps) => {
-  return (
-    <div className="mt-20 space-y-24">
+const MacroNutritionContent = ({
+  onScrollToCalculator
+}: MacroNutritionContentProps) => {
+  return <div className="mt-20 space-y-24">
       {/* Hero Section */}
       <section className="text-center">
         <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">
@@ -104,11 +103,7 @@ const MacroNutritionContent = ({ onScrollToCalculator }: MacroNutritionContentPr
             </div>
           </div>
           <div className="relative">
-            <img 
-              src={proteinFoods} 
-              alt="High-quality protein sources including chicken, salmon, eggs and beef" 
-              className="rounded-lg shadow-xl w-full"
-            />
+            <img src={proteinFoods} alt="High-quality protein sources including chicken, salmon, eggs and beef" className="rounded-lg shadow-xl w-full" />
           </div>
         </div>
       </section>
@@ -117,11 +112,7 @@ const MacroNutritionContent = ({ onScrollToCalculator }: MacroNutritionContentPr
       <section>
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="order-2 md:order-1">
-            <img 
-              src={carbFoods} 
-              alt="Healthy carbohydrate sources including sweet potatoes, oats and whole grains" 
-              className="rounded-lg shadow-xl w-full"
-            />
+            <img src={carbFoods} alt="Healthy carbohydrate sources including sweet potatoes, oats and whole grains" className="rounded-lg shadow-xl w-full" />
           </div>
           <div className="order-1 md:order-2">
             <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">
@@ -210,11 +201,7 @@ const MacroNutritionContent = ({ onScrollToCalculator }: MacroNutritionContentPr
             </div>
           </div>
           <div>
-            <img 
-              src={fatFoods} 
-              alt="Healthy fat sources including avocados, olive oil, nuts and salmon" 
-              className="rounded-lg shadow-xl w-full"
-            />
+            <img src={fatFoods} alt="Healthy fat sources including avocados, olive oil, nuts and salmon" className="rounded-lg shadow-xl w-full" />
           </div>
         </div>
       </section>
@@ -418,48 +405,7 @@ const MacroNutritionContent = ({ onScrollToCalculator }: MacroNutritionContentPr
           Your body operates as a system. When one area is neglected, results stall.
         </p>
         
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="flex justify-center">
-            <img 
-              src={performanceWheel} 
-              alt="The Enterprise Fitness Wheel showing interconnected elements of total performance" 
-              className="rounded-lg max-w-[300px] md:max-w-[400px]"
-            />
-          </div>
-          <div>
-            <h4 className="font-display text-lg text-foreground mb-4">The Enterprise Fitness Wheel</h4>
-            <ul className="space-y-3 text-muted-foreground font-body text-sm">
-              <li className="flex items-center gap-2">
-                <span className="text-primary">•</span>
-                <strong className="text-foreground">Total Calories</strong> — Precise fuel, not restriction
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">•</span>
-                <strong className="text-foreground">Gut Health</strong> — Absorption dictates outcomes
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">•</span>
-                <strong className="text-foreground">Food Quality</strong> — High-performance inputs only
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">•</span>
-                <strong className="text-foreground">Lifestyle</strong> — Stress, routine, recovery
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">•</span>
-                <strong className="text-foreground">Training</strong> — Structured, progressive, intentional
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">•</span>
-                <strong className="text-foreground">Macronutrients</strong> — Measured, not guessed
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">•</span>
-                <strong className="text-foreground">Sleep</strong> — The non-negotiable foundation
-              </li>
-            </ul>
-          </div>
-        </div>
+        
       </section>
 
       {/* Why Macros Alone Are Not Enough */}
@@ -542,8 +488,6 @@ const MacroNutritionContent = ({ onScrollToCalculator }: MacroNutritionContentPr
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default MacroNutritionContent;
