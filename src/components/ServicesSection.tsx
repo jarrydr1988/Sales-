@@ -13,11 +13,10 @@ const ServicesSection = () => {
     },
     {
       icon: Users,
-      title: "Hybrid Coaching",
-      subtitle: "In-Person + Remote",
-      description: "Structured training and nutrition with flexibility around your schedule.",
-      bestFor: "Busy professionals who travel or train independently some days.",
-      features: ["In-person sessions", "Remote support", "Nutrition guidance", "Flexible scheduling"],
+      title: "2-on-1 Personal Training",
+      description: "Train with a partner or friend and share the motivation while receiving expert guidance.",
+      bestFor: "Those who want accountability with a training partner.",
+      features: ["Partner accountability", "Shared session cost", "Competitive motivation", "Social fitness experience"],
       price: "£210",
       period: "per session",
       featured: true,
@@ -88,12 +87,9 @@ const ServicesSection = () => {
               </div>
 
               {/* Title */}
-              <h3 className="font-display text-2xl text-foreground mb-1 uppercase">
+              <h3 className="font-display text-2xl text-foreground mb-3 uppercase">
                 {service.title}
               </h3>
-              {service.subtitle && (
-                <p className="font-body text-sm text-primary mb-3">{service.subtitle}</p>
-              )}
 
               {/* Description */}
               <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed">
