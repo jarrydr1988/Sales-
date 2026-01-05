@@ -35,30 +35,14 @@ const AboutSection = () => {
               <span className="text-gradient">STARTS HERE</span>
             </h2>
 
-            <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">Coaching Experience That Goes Beyond the Gym Floor
+            <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">Coaching Experience That Goes Beyond the Gym Floor I’ve been in the personal training industry since 2009 and worked my way from junior trainer to senior leadership within one of the world’s most results-driven training systems. I’ve coached: CEOs, Entrepreneurs, Executives & High-pressure professionals. People who demand excellence and expect it from their coach.</p>
 
-I’ve been in the personal training industry since 2009 and worked my way from junior trainer to senior leadership within one of the world’s most results-driven training systems.
-
-I’ve coached: CEOs, Entrepreneurs, Executives & High-pressure professionals. People who demand excellence — and expect it from their coach.</p>
-
-            <p className="font-body text-lg text-muted-foreground mb-12 leading-relaxed">You’re Successful — But Your Body Isn’t Keeping Up
-
-You work long hours.
-Your schedule is packed.
-You train when you can — but results feel inconsistent or slow.
-
-Common frustrations I hear every week:
-
-“I don’t have time to waste in the gym”
-
+            <p className="font-body text-lg text-muted-foreground mb-12 leading-relaxed">You’re Successful ,But Your Body Isn’t Keeping Up
+You work long hours. Your schedule is packed. You train when you can but results feel inconsistent or slow. Common frustrations I hear every week: “I don’t have time to waste in the gym”
 “I train hard but my body fat won’t budge”
-
-“I used to be strong — now I just feel stiff and tired”
-
+“I used to be strong now I just feel stiff and tired”
 “I don’t know how much I should be eating anymore”
-
-The problem isn’t effort.
-It’s strategy.</p>
+The problem isn’t effort. It’s strategy.</p>
 
             {/* Features Grid */}
             <div className="grid sm:grid-cols-2 gap-6">
