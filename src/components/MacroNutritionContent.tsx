@@ -33,9 +33,7 @@ const MacroNutritionContent = ({
           What Are <span className="text-primary">Macros?</span>
         </h2>
         <div className="max-w-2xl mx-auto">
-          <p className="text-muted-foreground font-body mb-6">
-            Macros — short for macronutrients — are the three primary nutrients that determine how your body looks, performs, and recovers:
-          </p>
+          <p className="text-muted-foreground font-body mb-6">Macros, short for macronutrients, are the three primary nutrients that determine how your body looks, performs, and recovers:</p>
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="bg-card border border-border rounded-lg p-4 text-center">
               <span className="font-display text-primary text-lg">Protein</span>
@@ -53,9 +51,7 @@ const MacroNutritionContent = ({
               <strong>Macros</strong> determine <em>what that weight is made of.</em>
             </p>
           </div>
-          <p className="text-muted-foreground font-body mt-6 text-center">
-            When set correctly, macros allow you to lose fat, maintain or build muscle, and perform at a high level — without unnecessary restriction.
-          </p>
+          <p className="text-muted-foreground font-body mt-6 text-center">When set correctly, macros allow you to lose fat, maintain or build muscle, and perform at a high level, without unnecessary restriction.</p>
         </div>
       </section>
 
@@ -264,9 +260,7 @@ const MacroNutritionContent = ({
         <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
           👉 Get Your Personalised <span className="text-primary">Macro Targets</span>
         </h2>
-        <p className="text-muted-foreground font-body mb-6 max-w-xl mx-auto">
-          Enter your details and receive your customised calorie and macro breakdown — delivered directly to your inbox.
-        </p>
+        <p className="text-muted-foreground font-body mb-6 max-w-xl mx-auto">Enter your details and receive your customised calorie and macro breakdown, delivered directly to your inbox.</p>
         <Button variant="hero" size="xl" onClick={onScrollToCalculator} className="gap-2">
           Calculate Your Macros
           <ArrowRight className="w-5 h-5" />
@@ -413,9 +407,7 @@ const MacroNutritionContent = ({
         <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6 text-center">
           Why Macros Alone <span className="text-primary">Are Not Enough</span>
         </h2>
-        <p className="text-muted-foreground font-body text-center mb-8 max-w-xl mx-auto">
-          Macros are a powerful starting point — not the full solution. Most people discover that:
-        </p>
+        <p className="text-muted-foreground font-body text-center mb-8 max-w-xl mx-auto">Macros are a powerful starting point, not the full solution. Most people discover that:</p>
         <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto">
           <div className="flex items-start gap-3">
             <span className="text-primary">•</span>
