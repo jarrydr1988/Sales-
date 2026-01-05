@@ -1,21 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-trainer.jpg";
-
 const HeroSection = () => {
-
-  return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
-    >
+  return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Personal trainer in gym"
-          className="w-full h-full object-cover object-center"
-        />
+        <img src={heroImage} alt="Personal trainer in gym" className="w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
@@ -42,13 +32,17 @@ const HeroSection = () => {
           </h1>
 
           {/* Subheading */}
-          <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-10 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            Join thousands who have transformed their lives. Get exclusive training 
-            tips, workout plans, and nutrition advice delivered to your inbox.
-          </p>
+          <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-10 animate-fade-in" style={{
+          animationDelay: "0.3s"
+        }}>If you’ve lost touch with how strong, fit, and capable your body should feel, you’re not alone.
+My coaching is designed for people who demand high performance in their career and want the same from their body.
+
+        </p>
 
           {/* CTA Button */}
-          <a href="#contact" className="animate-fade-in" style={{ animationDelay: "0.5s" }}>
+          <a href="#contact" className="animate-fade-in" style={{
+          animationDelay: "0.5s"
+        }}>
             <Button variant="hero" size="xl">
               Get Started
               <ArrowRight className="ml-2" />
@@ -63,8 +57,6 @@ const HeroSection = () => {
           <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;

@@ -1,31 +1,23 @@
 import { Award, Target, Users, Zap } from "lucide-react";
-
 const AboutSection = () => {
-  const features = [
-    {
-      icon: Target,
-      title: "Goal-Oriented",
-      description: "Customized programs tailored to your specific fitness goals",
-    },
-    {
-      icon: Zap,
-      title: "High Intensity",
-      description: "Maximize results with scientifically-backed training methods",
-    },
-    {
-      icon: Users,
-      title: "Personal Support",
-      description: "One-on-one attention and guidance throughout your journey",
-    },
-    {
-      icon: Award,
-      title: "Proven Results",
-      description: "Track record of helping clients achieve lasting transformations",
-    },
-  ];
-
-  return (
-    <section id="about" className="py-24 md:py-32 bg-gradient-to-b from-background to-card">
+  const features = [{
+    icon: Target,
+    title: "Goal-Oriented",
+    description: "Customized programs tailored to your specific fitness goals"
+  }, {
+    icon: Zap,
+    title: "High Intensity",
+    description: "Maximize results with scientifically-backed training methods"
+  }, {
+    icon: Users,
+    title: "Personal Support",
+    description: "One-on-one attention and guidance throughout your journey"
+  }, {
+    icon: Award,
+    title: "Proven Results",
+    description: "Track record of helping clients achieve lasting transformations"
+  }];
+  return <section id="about" className="py-24 md:py-32 bg-gradient-to-b from-background to-card">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
@@ -43,26 +35,36 @@ const AboutSection = () => {
               <span className="text-gradient">STARTS HERE</span>
             </h2>
 
-            <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">
-              With over a decade of experience in personal training, I've dedicated 
-              my life to helping individuals transform not just their bodies, but 
-              their entire approach to health and wellness.
-            </p>
+            <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">Coaching Experience That Goes Beyond the Gym Floor
 
-            <p className="font-body text-lg text-muted-foreground mb-12 leading-relaxed">
-              I believe that fitness is not a destination but a lifestyle. My 
-              approach combines cutting-edge training techniques with personalized 
-              nutrition guidance to ensure you achieve sustainable, long-lasting results.
-            </p>
+I’ve been in the personal training industry since 2009 and worked my way from junior trainer to senior leadership within one of the world’s most results-driven training systems.
+
+I’ve coached: CEOs, Entrepreneurs, Executives & High-pressure professionals. People who demand excellence — and expect it from their coach.</p>
+
+            <p className="font-body text-lg text-muted-foreground mb-12 leading-relaxed">You’re Successful — But Your Body Isn’t Keeping Up
+
+You work long hours.
+Your schedule is packed.
+You train when you can — but results feel inconsistent or slow.
+
+Common frustrations I hear every week:
+
+“I don’t have time to waste in the gym”
+
+“I train hard but my body fat won’t budge”
+
+“I used to be strong — now I just feel stiff and tired”
+
+“I don’t know how much I should be eating anymore”
+
+The problem isn’t effort.
+It’s strategy.</p>
 
             {/* Features Grid */}
             <div className="grid sm:grid-cols-2 gap-6">
-              {features.map((feature, index) => (
-                <div
-                  key={feature.title}
-                  className="group p-6 rounded-lg bg-secondary/50 border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
+              {features.map((feature, index) => <div key={feature.title} className="group p-6 rounded-lg bg-secondary/50 border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10" style={{
+              animationDelay: `${index * 0.1}s`
+            }}>
                   <feature.icon className="w-10 h-10 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
                   <h3 className="font-display text-xl text-foreground mb-2">
                     {feature.title}
@@ -70,8 +72,7 @@ const AboutSection = () => {
                   <p className="font-body text-sm text-muted-foreground">
                     {feature.description}
                   </p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -112,8 +113,6 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AboutSection;
