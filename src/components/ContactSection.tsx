@@ -9,10 +9,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,15 +31,37 @@ const ContactSection = () => {
     { value: "general", label: "General Inquiry" },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would integrate with your email service
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", inquiryType: "", message: "" });
-    }, 3000);
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: formData,
+      });
+
+      if (error) throw error;
+
+      setIsSubmitted(true);
+      toast({
+        title: "Message sent!",
+        description: "We've sent you a confirmation email. We'll be in touch soon.",
+      });
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: "", email: "", inquiryType: "", message: "" });
+      }, 3000);
+    } catch (error: any) {
+      console.error("Error sending contact form:", error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again later or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -143,9 +169,14 @@ const ContactSection = () => {
               variant="hero"
               size="lg"
               className="w-full"
-              disabled={isSubmitted}
+              disabled={isSubmitted || isLoading}
             >
-              {isSubmitted ? (
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  Sending...
+                </>
+              ) : isSubmitted ? (
                 <>
                   <CheckCircle className="w-5 h-5 mr-2" />
                   Message Sent!
