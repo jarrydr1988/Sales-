@@ -255,17 +255,6 @@ const MacroNutritionContent = ({
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="text-center bg-gradient-to-b from-primary/10 to-transparent rounded-lg p-8 md:p-12">
-        <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
-          👉 Get Your Personalised <span className="text-primary">Macro Targets</span>
-        </h2>
-        <p className="text-muted-foreground font-body mb-6 max-w-xl mx-auto">Enter your details and receive your customised calorie and macro breakdown, delivered directly to your inbox.</p>
-        <Button variant="hero" size="xl" onClick={onScrollToCalculator} className="gap-2">
-          Calculate Your Macros
-          <ArrowRight className="w-5 h-5" />
-        </Button>
-      </section>
 
       {/* How to Use Your Macro Targets */}
       <section>
@@ -399,7 +388,71 @@ const MacroNutritionContent = ({
           Your body operates as a system. When one area is neglected, results stall.
         </p>
         
-        
+        <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+          <div className="flex items-start gap-3 bg-card border border-border rounded-lg p-4">
+            <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Flame className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-display text-foreground text-sm mb-1">Total Calories</h4>
+              <p className="text-muted-foreground font-body text-xs">Precise fuel, not restriction</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 bg-card border border-border rounded-lg p-4">
+            <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Heart className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-display text-foreground text-sm mb-1">Gut Health</h4>
+              <p className="text-muted-foreground font-body text-xs">Absorption dictates outcomes</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 bg-card border border-border rounded-lg p-4">
+            <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Apple className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-display text-foreground text-sm mb-1">Food Quality</h4>
+              <p className="text-muted-foreground font-body text-xs">High-performance inputs only</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 bg-card border border-border rounded-lg p-4">
+            <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Activity className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-display text-foreground text-sm mb-1">Lifestyle</h4>
+              <p className="text-muted-foreground font-body text-xs">Stress, routine, recovery</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 bg-card border border-border rounded-lg p-4">
+            <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Dumbbell className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-display text-foreground text-sm mb-1">Training</h4>
+              <p className="text-muted-foreground font-body text-xs">Structured, progressive, intentional</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 bg-card border border-border rounded-lg p-4">
+            <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Scale className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-display text-foreground text-sm mb-1">Macronutrients</h4>
+              <p className="text-muted-foreground font-body text-xs">Measured, not guessed</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 bg-card border border-border rounded-lg p-4 md:col-span-2 md:max-w-xs md:mx-auto">
+            <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Moon className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-display text-foreground text-sm mb-1">Sleep</h4>
+              <p className="text-muted-foreground font-body text-xs">The non-negotiable foundation</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Why Macros Alone Are Not Enough */}
@@ -479,6 +532,18 @@ const MacroNutritionContent = ({
             </p>
           </div>
         </div>
+      </section>
+
+      {/* CTA Section - Moved to Bottom */}
+      <section className="text-center bg-gradient-to-b from-primary/10 to-transparent rounded-lg p-8 md:p-12">
+        <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
+          👉 Get Your Personalised <span className="text-primary">Macro Targets</span>
+        </h2>
+        <p className="text-muted-foreground font-body mb-6 max-w-xl mx-auto">Enter your details and receive your customised calorie and macro breakdown, delivered directly to your inbox.</p>
+        <Button variant="hero" size="xl" onClick={onScrollToCalculator} className="gap-2">
+          Calculate Your Macros
+          <ArrowRight className="w-5 h-5" />
+        </Button>
       </section>
     </div>;
 };
