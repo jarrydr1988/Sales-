@@ -35,15 +35,15 @@ const MacroNutritionContent = ({
         <div className="max-w-2xl mx-auto">
           <p className="text-muted-foreground font-body mb-6">Macros, short for macronutrients, are the three primary nutrients that determine how your body looks, performs, and recovers:</p>
           <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="bg-card border border-border rounded-lg p-4 text-center">
+            <a href="#protein-section" className="bg-card border border-border rounded-lg p-4 text-center hover:border-primary transition-colors cursor-pointer">
               <span className="font-display text-primary text-lg">Protein</span>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-4 text-center">
+            </a>
+            <a href="#carbohydrates-section" className="bg-card border border-border rounded-lg p-4 text-center hover:border-primary transition-colors cursor-pointer">
               <span className="font-display text-primary text-lg">Carbohydrates</span>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-4 text-center">
+            </a>
+            <a href="#fats-section" className="bg-card border border-border rounded-lg p-4 text-center hover:border-primary transition-colors cursor-pointer">
               <span className="font-display text-primary text-lg">Fats</span>
-            </div>
+            </a>
           </div>
           <div className="bg-card border border-primary/30 rounded-lg p-6">
             <p className="text-foreground font-body text-center">
@@ -56,7 +56,7 @@ const MacroNutritionContent = ({
       </section>
 
       {/* Protein Section */}
-      <section>
+      <section id="protein-section">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">
@@ -105,7 +105,7 @@ const MacroNutritionContent = ({
       </section>
 
       {/* Carbohydrates Section */}
-      <section>
+      <section id="carbohydrates-section">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="order-2 md:order-1">
             <img src={carbFoods} alt="Healthy carbohydrate sources including sweet potatoes, oats and whole grains" className="rounded-lg shadow-xl w-full" />
@@ -154,7 +154,7 @@ const MacroNutritionContent = ({
       </section>
 
       {/* Fats Section */}
-      <section>
+      <section id="fats-section">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">
