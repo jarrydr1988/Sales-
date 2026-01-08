@@ -60,11 +60,11 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
           {services.map((service) => (
             <div
               key={service.title}
-              className={`group relative p-8 rounded-2xl border transition-all duration-500 hover:scale-105 ${
+              className={`group relative p-8 rounded-2xl border transition-all duration-500 hover:scale-105 flex flex-col h-full ${
                 service.featured
                   ? "bg-gradient-to-b from-primary/20 to-primary/5 border-primary/50 shadow-lg shadow-primary/20"
                   : "bg-card border-border hover:border-primary/30"
@@ -92,12 +92,12 @@ const ServicesSection = () => {
               </h3>
 
               {/* Description */}
-              <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed">
+              <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed min-h-[60px]">
                 {service.description}
               </p>
 
               {/* Best For */}
-              <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10">
+              <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10 min-h-[85px]">
                 <span className="font-body text-xs uppercase tracking-wider text-primary font-semibold">Best for:</span>
                 <p className="font-body text-sm text-muted-foreground mt-1">{service.bestFor}</p>
               </div>
@@ -111,7 +111,7 @@ const ServicesSection = () => {
               </div>
 
               {/* Features */}
-              <ul className="space-y-3">
+              <ul className="space-y-3 mt-auto">
                 {service.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-primary flex-shrink-0" />
