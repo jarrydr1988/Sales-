@@ -541,7 +541,7 @@ const MacroNutritionContent = ({
         </h2>
         <p className="text-muted-foreground font-body mb-6 max-w-xl mx-auto">Enter your details and receive your customised calorie and macro breakdown, delivered directly to your inbox.</p>
         <div className="flex justify-center">
-          <Button variant="hero" size="xl" onClick={onScrollToCalculator} className="gap-2 w-full md:w-auto">
+          <Button variant="hero" size="xl" onClick={onScrollToCalculator} className="gap-2">
             Calculate Your Macros
             <ArrowRight className="w-5 h-5" />
           </Button>
