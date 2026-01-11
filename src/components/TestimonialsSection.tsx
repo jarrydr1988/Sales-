@@ -1,7 +1,6 @@
 import { Quote } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { type CarouselApi } from "@/components/ui/carousel";
-import { useState, useEffect } from "react";
+
 const TestimonialsSection = () => {
   const testimonials = [{
     name: "Sarah M.",
@@ -20,8 +19,6 @@ const TestimonialsSection = () => {
     story: "I was skeptical about personal training, thinking I could figure it out on my own. Boy, was I wrong. The expertise and accountability made all the difference. I've run three marathons since starting, something I never dreamed possible.",
     result: "3 marathons completed"
   }];
-  const firstHalf = testimonials.slice(0, 2);
-  const secondHalf = testimonials.slice(2, 4);
   const TestimonialCard = ({
     testimonial
   }: {
@@ -44,6 +41,7 @@ const TestimonialsSection = () => {
         </div>
       </div>
     </div>;
+
   return <section id="testimonials" className="py-24 md:py-32 bg-card">
       <div className="container mx-auto px-6">
         {/* Section Header */}
@@ -66,31 +64,15 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Two Carousel Blocks */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* First Carousel */}
-          <Carousel opts={{
-          loop: true
-        }} className="w-full">
+        {/* Single Carousel */}
+        <div className="max-w-3xl mx-auto">
+          <Carousel opts={{ loop: true }} className="w-full">
             <CarouselContent>
-              {firstHalf.map(testimonial => <CarouselItem key={testimonial.name}>
+              {testimonials.map(testimonial => (
+                <CarouselItem key={testimonial.name}>
                   <TestimonialCard testimonial={testimonial} />
-                </CarouselItem>)}
-            </CarouselContent>
-            <div className="flex justify-center gap-2 mt-6">
-              <CarouselPrevious className="static translate-y-0 h-10 w-10" />
-              <CarouselNext className="static translate-y-0 h-10 w-10" />
-            </div>
-          </Carousel>
-
-          {/* Second Carousel */}
-          <Carousel opts={{
-          loop: true
-        }} className="w-full">
-            <CarouselContent>
-              {secondHalf.map(testimonial => <CarouselItem key={testimonial.name}>
-                  <TestimonialCard testimonial={testimonial} />
-                </CarouselItem>)}
+                </CarouselItem>
+              ))}
             </CarouselContent>
             <div className="flex justify-center gap-2 mt-6">
               <CarouselPrevious className="static translate-y-0 h-10 w-10" />
