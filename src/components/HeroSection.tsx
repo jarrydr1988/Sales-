@@ -17,7 +17,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl">
           {/* Tagline */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in my-[40px]">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="font-body text-sm uppercase tracking-wider text-primary font-semibold">
               Transform Your Body
