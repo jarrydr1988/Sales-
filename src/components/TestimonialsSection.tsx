@@ -64,8 +64,22 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Single Carousel */}
-        <div className="max-w-3xl mx-auto">
+        {/* Two Carousel Blocks */}
+        <div className="grid md:grid-cols-2 gap-8">
+          <Carousel opts={{ loop: true }} className="w-full">
+            <CarouselContent>
+              {testimonials.map(testimonial => (
+                <CarouselItem key={testimonial.name}>
+                  <TestimonialCard testimonial={testimonial} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-2 mt-6">
+              <CarouselPrevious className="static translate-y-0 h-10 w-10" />
+              <CarouselNext className="static translate-y-0 h-10 w-10" />
+            </div>
+          </Carousel>
+
           <Carousel opts={{ loop: true }} className="w-full">
             <CarouselContent>
               {testimonials.map(testimonial => (
