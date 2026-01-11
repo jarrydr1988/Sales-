@@ -6,6 +6,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { type CarouselApi } from "@/components/ui/carousel";
+import { useState, useEffect } from "react";
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -81,7 +83,7 @@ const TestimonialsSection = () => {
         {/* Two Carousel Blocks */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* First Carousel */}
-          <Carousel className="w-full">
+          <Carousel opts={{ loop: true }} className="w-full">
             <CarouselContent>
               {firstHalf.map((testimonial) => (
                 <CarouselItem key={testimonial.name}>
@@ -89,14 +91,14 @@ const TestimonialsSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center gap-2 mt-4">
-              <CarouselPrevious className="static translate-y-0" />
-              <CarouselNext className="static translate-y-0" />
+            <div className="flex justify-center gap-2 mt-6">
+              <CarouselPrevious className="static translate-y-0 h-10 w-10" />
+              <CarouselNext className="static translate-y-0 h-10 w-10" />
             </div>
           </Carousel>
 
           {/* Second Carousel */}
-          <Carousel className="w-full">
+          <Carousel opts={{ loop: true }} className="w-full">
             <CarouselContent>
               {secondHalf.map((testimonial) => (
                 <CarouselItem key={testimonial.name}>
@@ -104,9 +106,9 @@ const TestimonialsSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center gap-2 mt-4">
-              <CarouselPrevious className="static translate-y-0" />
-              <CarouselNext className="static translate-y-0" />
+            <div className="flex justify-center gap-2 mt-6">
+              <CarouselPrevious className="static translate-y-0 h-10 w-10" />
+              <CarouselNext className="static translate-y-0 h-10 w-10" />
             </div>
           </Carousel>
         </div>
