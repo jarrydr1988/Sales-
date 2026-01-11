@@ -1,7 +1,14 @@
 import { Check, User, Users, Monitor, Sparkles } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const ServicesSection = () => {
-  const services = [
+  const personalTraining = [
     {
       icon: User,
       title: "1:1 Personal Training",
@@ -21,6 +28,9 @@ const ServicesSection = () => {
       period: "per session",
       featured: true,
     },
+  ];
+
+  const onlineOptions = [
     {
       icon: Monitor,
       title: "Online Coaching",
@@ -38,8 +48,71 @@ const ServicesSection = () => {
       features: ["Multiple program options", "Community forums", "Support groups", "Goal-based training"],
       price: "£25",
       period: "per month",
+      featured: true,
     },
   ];
+
+  const ServiceCard = ({ service }: { service: typeof personalTraining[0] }) => (
+    <div
+      className={`group relative p-8 rounded-2xl border transition-all duration-500 flex flex-col h-full ${
+        service.featured
+          ? "bg-gradient-to-b from-primary/20 to-primary/5 border-primary/50 shadow-lg shadow-primary/20"
+          : "bg-card border-border hover:border-primary/30"
+      }`}
+    >
+      {/* Featured Badge */}
+      {service.featured && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary">
+          <span className="font-body text-xs uppercase tracking-wider text-primary-foreground font-bold">
+            Best Value
+          </span>
+        </div>
+      )}
+
+      {/* Icon */}
+      <div className={`inline-flex p-4 rounded-xl mb-6 ${
+        service.featured ? "bg-primary/20" : "bg-secondary"
+      }`}>
+        <service.icon className="w-8 h-8 text-primary" />
+      </div>
+
+      {/* Title */}
+      <h3 className="font-display text-2xl text-foreground mb-3 uppercase">
+        {service.title}
+      </h3>
+
+      {/* Description */}
+      <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed min-h-[60px]">
+        {service.description}
+      </p>
+
+      {/* Best For */}
+      <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10 min-h-[85px]">
+        <span className="font-body text-xs uppercase tracking-wider text-primary font-semibold">Best for:</span>
+        <p className="font-body text-sm text-muted-foreground mt-1">{service.bestFor}</p>
+      </div>
+
+      {/* Price */}
+      <div className="mb-6 pb-6 border-b border-border">
+        <span className="font-display text-5xl text-primary">{service.price}</span>
+        <span className="font-body text-sm text-muted-foreground ml-2">
+          {service.period}
+        </span>
+      </div>
+
+      {/* Features */}
+      <ul className="space-y-3 mt-auto">
+        {service.features.map((feature) => (
+          <li key={feature} className="flex items-center gap-3">
+            <Check className="w-4 h-4 text-primary flex-shrink-0" />
+            <span className="font-body text-sm text-muted-foreground">
+              {feature}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 
   return (
     <section id="services" className="py-24 md:py-32 bg-background">
@@ -59,70 +132,43 @@ const ServicesSection = () => {
           </h2>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className={`group relative p-8 rounded-2xl border transition-all duration-500 hover:scale-105 flex flex-col h-full ${
-                service.featured
-                  ? "bg-gradient-to-b from-primary/20 to-primary/5 border-primary/50 shadow-lg shadow-primary/20"
-                  : "bg-card border-border hover:border-primary/30"
-              }`}
-            >
-              {/* Featured Badge */}
-              {service.featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary">
-                  <span className="font-body text-xs uppercase tracking-wider text-primary-foreground font-bold">
-                    Best Value
-                  </span>
-                </div>
-              )}
-
-              {/* Icon */}
-              <div className={`inline-flex p-4 rounded-xl mb-6 ${
-                service.featured ? "bg-primary/20" : "bg-secondary"
-              }`}>
-                <service.icon className="w-8 h-8 text-primary" />
-              </div>
-
-              {/* Title */}
-              <h3 className="font-display text-2xl text-foreground mb-3 uppercase">
-                {service.title}
-              </h3>
-
-              {/* Description */}
-              <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed min-h-[60px]">
-                {service.description}
-              </p>
-
-              {/* Best For */}
-              <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10 min-h-[85px]">
-                <span className="font-body text-xs uppercase tracking-wider text-primary font-semibold">Best for:</span>
-                <p className="font-body text-sm text-muted-foreground mt-1">{service.bestFor}</p>
-              </div>
-
-              {/* Price */}
-              <div className="mb-6 pb-6 border-b border-border">
-                <span className="font-display text-5xl text-primary">{service.price}</span>
-                <span className="font-body text-sm text-muted-foreground ml-2">
-                  {service.period}
-                </span>
-              </div>
-
-              {/* Features */}
-              <ul className="space-y-3 mt-auto">
-                {service.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="font-body text-sm text-muted-foreground">
-                      {feature}
-                    </span>
-                  </li>
+        {/* Two Carousel Boxes */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Personal Training Carousel */}
+          <div className="space-y-4">
+            <h3 className="font-display text-2xl text-foreground uppercase text-center">
+              Personal Training
+            </h3>
+            <Carousel className="w-full">
+              <CarouselContent>
+                {personalTraining.map((service) => (
+                  <CarouselItem key={service.title}>
+                    <ServiceCard service={service} />
+                  </CarouselItem>
                 ))}
-              </ul>
-            </div>
-          ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
+          </div>
+
+          {/* Online Options Carousel */}
+          <div className="space-y-4">
+            <h3 className="font-display text-2xl text-foreground uppercase text-center">
+              Online Options
+            </h3>
+            <Carousel className="w-full">
+              <CarouselContent>
+                {onlineOptions.map((service) => (
+                  <CarouselItem key={service.title}>
+                    <ServiceCard service={service} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
+          </div>
         </div>
       </div>
     </section>
