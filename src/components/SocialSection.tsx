@@ -1,35 +1,27 @@
 import { Instagram, Youtube, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-
 const SocialSection = () => {
   const [email, setEmail] = useState("");
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Email submitted:", email);
     setEmail("");
   };
-
-  const socialLinks = [
-    {
-      icon: Instagram,
-      label: "Instagram",
-      handle: "@jarrydroos_pt",
-      url: "https://www.instagram.com/jarrydroos_pt?igsh=Y3pnY21mOGNhMjJp",
-      followers: "45K",
-    },
-    {
-      icon: Youtube,
-      label: "YouTube",
-      handle: "Jarryd Roos PT",
-      url: "#",
-      followers: "120K",
-    },
-  ];
-
-  return (
-    <section id="contact" className="py-24 md:py-32 bg-gradient-to-b from-card to-background">
+  const socialLinks = [{
+    icon: Instagram,
+    label: "Instagram",
+    handle: "@jarrydroos_pt",
+    url: "https://www.instagram.com/jarrydroos_pt?igsh=Y3pnY21mOGNhMjJp",
+    followers: "45K"
+  }, {
+    icon: Youtube,
+    label: "YouTube",
+    handle: "Jarryd Roos PT",
+    url: "#",
+    followers: "120K"
+  }];
+  return <section id="contact" className="py-24 md:py-32 bg-gradient-to-b from-card to-background">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Social Media */}
@@ -53,12 +45,7 @@ const SocialSection = () => {
 
             {/* Social Links Grid */}
             <div className="grid sm:grid-cols-2 gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  className="group flex items-center gap-4 p-5 rounded-xl bg-secondary/50 border border-border transition-all duration-300 hover:border-primary/50 hover:bg-secondary"
-                >
+              {socialLinks.map(social => <a key={social.label} href={social.url} className="group flex items-center gap-4 p-5 rounded-xl bg-secondary/50 border border-border transition-all duration-300 hover:border-primary/50 hover:bg-secondary">
                   <div className="p-3 rounded-lg bg-background/50 group-hover:bg-primary/20 transition-colors">
                     <social.icon className="w-6 h-6 text-foreground group-hover:text-primary transition-colors" />
                   </div>
@@ -69,12 +56,9 @@ const SocialSection = () => {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="font-display text-xl text-primary">
-                      {social.followers}
-                    </p>
+                    
                   </div>
-                </a>
-              ))}
+                </a>)}
             </div>
           </div>
 
@@ -97,14 +81,7 @@ const SocialSection = () => {
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="w-full px-6 py-4 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body text-lg"
-                />
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" required className="w-full px-6 py-4 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body text-lg" />
                 <Button variant="hero" size="xl" className="w-full" type="submit">
                   Join the Community
                   <ArrowRight className="ml-2" />
@@ -118,8 +95,6 @@ const SocialSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default SocialSection;
