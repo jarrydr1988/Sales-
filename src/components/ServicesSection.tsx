@@ -1,4 +1,4 @@
-import { Check, User, Users, Monitor, Sparkles } from "lucide-react";
+import { Check } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +10,6 @@ import {
 const ServicesSection = () => {
   const personalTraining = [
     {
-      icon: User,
       title: "1:1 Personal Training",
       description: "High-touch coaching for clients who want hands-on guidance, precision programming, and accountability.",
       bestFor: "Those who want elite results with zero guesswork.",
@@ -19,7 +18,6 @@ const ServicesSection = () => {
       period: "per session",
     },
     {
-      icon: Users,
       title: "2-on-1 Personal Training",
       description: "Train with a partner or friend and share the motivation while receiving expert guidance.",
       bestFor: "Those who want accountability with a training partner.",
@@ -32,7 +30,6 @@ const ServicesSection = () => {
 
   const onlineOptions = [
     {
-      icon: Monitor,
       title: "Online Coaching",
       description: "Data-driven programming, macro targets, and weekly check-ins — wherever you are.",
       bestFor: "Self-motivated clients who still want expert oversight.",
@@ -41,7 +38,6 @@ const ServicesSection = () => {
       period: "per month",
     },
     {
-      icon: Sparkles,
       title: "Online Training Community",
       description: "Join our community with multiple programs to choose from to suit your goals, plus community forums and groups.",
       bestFor: "Those looking for affordable guided training with community support.",
@@ -54,7 +50,7 @@ const ServicesSection = () => {
 
   const ServiceCard = ({ service }: { service: typeof personalTraining[0] }) => (
     <div
-      className={`group relative p-8 rounded-2xl border transition-all duration-500 flex flex-col h-full ${
+      className={`group relative p-6 rounded-2xl border transition-all duration-500 flex flex-col h-full ${
         service.featured
           ? "bg-gradient-to-b from-primary/20 to-primary/5 border-primary/50 shadow-lg shadow-primary/20"
           : "bg-card border-border hover:border-primary/30"
@@ -62,50 +58,43 @@ const ServicesSection = () => {
     >
       {/* Featured Badge */}
       {service.featured && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary">
-          <span className="font-body text-xs uppercase tracking-wider text-primary-foreground font-bold">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary">
+          <span className="font-body text-xs uppercase tracking-wider text-primary-foreground font-bold whitespace-nowrap">
             Best Value
           </span>
         </div>
       )}
 
-      {/* Icon */}
-      <div className={`inline-flex p-4 rounded-xl mb-6 ${
-        service.featured ? "bg-primary/20" : "bg-secondary"
-      }`}>
-        <service.icon className="w-8 h-8 text-primary" />
-      </div>
-
       {/* Title */}
-      <h3 className="font-display text-2xl text-foreground mb-3 uppercase">
+      <h3 className="font-display text-xl text-foreground mb-2 uppercase mt-2">
         {service.title}
       </h3>
 
       {/* Description */}
-      <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed min-h-[60px]">
+      <p className="font-body text-sm text-muted-foreground mb-3 leading-relaxed min-h-[48px]">
         {service.description}
       </p>
 
       {/* Best For */}
-      <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10 min-h-[85px]">
+      <div className="mb-4 p-2 rounded-lg bg-primary/5 border border-primary/10 min-h-[70px]">
         <span className="font-body text-xs uppercase tracking-wider text-primary font-semibold">Best for:</span>
-        <p className="font-body text-sm text-muted-foreground mt-1">{service.bestFor}</p>
+        <p className="font-body text-xs text-muted-foreground mt-1">{service.bestFor}</p>
       </div>
 
       {/* Price */}
-      <div className="mb-6 pb-6 border-b border-border">
-        <span className="font-display text-5xl text-primary">{service.price}</span>
+      <div className="mb-4 pb-4 border-b border-border">
+        <span className="font-display text-4xl text-primary">{service.price}</span>
         <span className="font-body text-sm text-muted-foreground ml-2">
           {service.period}
         </span>
       </div>
 
       {/* Features */}
-      <ul className="space-y-3 mt-auto">
+      <ul className="space-y-2 mt-auto">
         {service.features.map((feature) => (
-          <li key={feature} className="flex items-center gap-3">
-            <Check className="w-4 h-4 text-primary flex-shrink-0" />
-            <span className="font-body text-sm text-muted-foreground">
+          <li key={feature} className="flex items-center gap-2">
+            <Check className="w-3 h-3 text-primary flex-shrink-0" />
+            <span className="font-body text-xs text-muted-foreground">
               {feature}
             </span>
           </li>
@@ -139,7 +128,7 @@ const ServicesSection = () => {
             <h3 className="font-display text-2xl text-foreground uppercase text-center">
               Personal Training
             </h3>
-            <Carousel className="w-full">
+            <Carousel className="w-full" opts={{ loop: true }}>
               <CarouselContent>
                 {personalTraining.map((service) => (
                   <CarouselItem key={service.title}>
@@ -157,7 +146,7 @@ const ServicesSection = () => {
             <h3 className="font-display text-2xl text-foreground uppercase text-center">
               Online Options
             </h3>
-            <Carousel className="w-full">
+            <Carousel className="w-full" opts={{ loop: true }}>
               <CarouselContent>
                 {onlineOptions.map((service) => (
                   <CarouselItem key={service.title}>
