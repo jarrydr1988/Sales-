@@ -68,7 +68,7 @@ const ContactSection = () => {
     <section id="contact" className="py-24 md:py-32 bg-card">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="contact-header text-center mb-16">
           <span className="inline-block px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-primary font-body text-sm uppercase tracking-widest mb-6">
             Get In Touch
           </span>
@@ -81,7 +81,7 @@ const ContactSection = () => {
         </div>
 
         {/* Contact Form */}
-        <div className="max-w-2xl mx-auto">
+        <div className="contact-form max-w-2xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name & Email Row */}
             <div className="grid md:grid-cols-2 gap-6">
