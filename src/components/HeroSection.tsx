@@ -14,10 +14,10 @@ const HeroSection = () => {
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
 
       {/* Content */}
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 hero-content">
         <div className="max-w-3xl">
           {/* Tagline */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in my-[40px]">
+          <div className="hero-tagline inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 my-[40px]">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="font-body text-sm uppercase tracking-wider text-primary font-semibold">
               Transform Your Body
@@ -25,24 +25,20 @@ const HeroSection = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-none mb-6 animate-slide-up uppercase">
+          <h1 className="hero-heading font-display text-6xl md:text-8xl lg:text-9xl leading-none mb-6 uppercase">
             <span className="text-foreground">Unlock</span>
             <br />
             <span className="text-gradient">Your Potential</span>
           </h1>
 
           {/* Subheading */}
-          <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-10 animate-fade-in" style={{
-          animationDelay: "0.3s"
-        }}>If you’ve lost touch with how strong, fit, and capable your body should feel, you’re not alone.
+          <p className="hero-subheading font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-10">If you've lost touch with how strong, fit, and capable your body should feel, you're not alone.
 My coaching is designed for people who demand high performance in their career and want the same from their body.
 
-        </p>
+          </p>
 
           {/* CTA Button */}
-          <a href="#contact" className="animate-fade-in" style={{
-          animationDelay: "0.5s"
-        }}>
+          <a href="#contact" className="hero-cta inline-block">
             <Button variant="hero" size="xl">
               Get Started
               <ArrowRight className="ml-2" />

@@ -37,7 +37,7 @@ const ServicesSection = () => {
     service
   }: {
     service: typeof personalTraining[0];
-  }) => <div className={`group relative p-6 rounded-2xl border transition-all duration-500 flex flex-col h-full ${service.featured ? "bg-gradient-to-b from-primary/20 to-primary/5 border-primary/50 shadow-lg shadow-primary/20" : "bg-card border-border hover:border-primary/30"}`}>
+  }) => <div className={`service-card group relative p-6 rounded-2xl border transition-all duration-500 flex flex-col h-full ${service.featured ? "bg-gradient-to-b from-primary/20 to-primary/5 border-primary/50 shadow-lg shadow-primary/20" : "bg-card border-border hover:border-primary/30"}`}>
       {/* Featured Badge */}
       {service.featured && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary my-[10px]">
           <span className="font-body text-xs uppercase tracking-wider text-primary-foreground font-bold whitespace-nowrap">
@@ -79,10 +79,11 @@ const ServicesSection = () => {
           </li>)}
       </ul>
     </div>;
+
   return <section id="services" className="py-24 md:py-32 bg-background">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="services-header text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <span className="font-body text-sm uppercase tracking-wider text-primary font-semibold">
               Training Options
@@ -99,7 +100,7 @@ const ServicesSection = () => {
         {/* Two Carousel Boxes */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Personal Training Carousel */}
-          <div className="space-y-4">
+          <div className="services-carousel services-carousel-1 space-y-4">
             <h3 className="font-display text-2xl text-foreground uppercase text-center">
               Personal Training
             </h3>
@@ -117,7 +118,7 @@ const ServicesSection = () => {
           </div>
 
           {/* Online Options Carousel */}
-          <div className="space-y-4">
+          <div className="services-carousel services-carousel-2 space-y-4">
             <h3 className="font-display text-2xl text-foreground uppercase text-center">
               Online Options
             </h3>

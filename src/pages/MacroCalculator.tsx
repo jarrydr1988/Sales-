@@ -171,8 +171,8 @@ const MacroCalculator = () => {
       <main className="pt-32 pb-20 px-6">
         <div ref={calculatorRef} className="container mx-auto max-w-2xl">
           {/* Intro Section */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 mb-4">
+          <div className="calculator-intro text-center mb-12">
+            <div className="calculator-header inline-flex items-center gap-3 mb-4">
               
               <h1 className="font-display text-4xl md:text-5xl text-foreground">
                 MACRO <span className="text-primary">CALCULATOR</span>
@@ -240,7 +240,7 @@ const MacroCalculator = () => {
           }}>
                 Calculate Again
               </Button>
-            </div> : <div className="bg-card border border-border rounded-lg p-6 md:p-8 space-y-6">
+            </div> : <div className="calculator-form bg-card border border-border rounded-lg p-6 md:p-8 space-y-6">
               {/* Name */}
               <div className="space-y-2">
                 <Label className="text-foreground font-display tracking-wider">Your Name</Label>
@@ -386,7 +386,7 @@ const MacroCalculator = () => {
         </div>
 
         {/* Nutrition Content Section */}
-        <div className="container mx-auto max-w-4xl mt-16">
+        <div className="nutrition-content container mx-auto max-w-4xl mt-16">
           <MacroNutritionContent onScrollToCalculator={scrollToCalculator} />
         </div>
       </main>

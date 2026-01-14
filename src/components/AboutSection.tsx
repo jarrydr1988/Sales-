@@ -21,9 +21,9 @@ const AboutSection = () => {
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
-          <div>
+          <div className="about-content">
             {/* Section Label */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+            <div className="about-header inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
               <span className="font-body text-sm uppercase tracking-wider text-primary">
                 About Me
               </span>
@@ -35,18 +35,18 @@ const AboutSection = () => {
               <span className="text-gradient">STARTS HERE</span>
             </h2>
 
-            <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">Coaching Experience That Goes Beyond the Gym Floor I’ve been in the personal training industry since 2009 and worked my way from junior trainer to senior leadership within one of the world’s most results-driven training systems. I’ve coached: CEOs, Entrepreneurs, Executives & High-pressure professionals. People who demand excellence and expect it from their coach.</p>
+            <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">Coaching Experience That Goes Beyond the Gym Floor I've been in the personal training industry since 2009 and worked my way from junior trainer to senior leadership within one of the world's most results-driven training systems. I've coached: CEOs, Entrepreneurs, Executives & High-pressure professionals. People who demand excellence and expect it from their coach.</p>
 
-            <p className="font-body text-lg text-muted-foreground mb-12 leading-relaxed">You’re Successful ,But Your Body Isn’t Keeping Up
-You work long hours. Your schedule is packed. You train when you can but results feel inconsistent or slow. Common frustrations I hear every week: “I don’t have time to waste in the gym”
-“I train hard but my body fat won’t budge”
-“I used to be strong now I just feel stiff and tired”
-“I don’t know how much I should be eating anymore”
-The problem isn’t effort. It’s strategy.</p>
+            <p className="font-body text-lg text-muted-foreground mb-12 leading-relaxed">You're Successful ,But Your Body Isn't Keeping Up
+You work long hours. Your schedule is packed. You train when you can but results feel inconsistent or slow. Common frustrations I hear every week: "I don't have time to waste in the gym"
+"I train hard but my body fat won't budge"
+"I used to be strong now I just feel stiff and tired"
+"I don't know how much I should be eating anymore"
+The problem isn't effort. It's strategy.</p>
 
             {/* Features Grid */}
             <div className="grid sm:grid-cols-2 gap-6">
-              {features.map((feature, index) => <div key={feature.title} className="group p-6 rounded-lg bg-secondary/50 border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10" style={{
+              {features.map((feature, index) => <div key={feature.title} className="about-feature group p-6 rounded-lg bg-secondary/50 border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10" style={{
               animationDelay: `${index * 0.1}s`
             }}>
                   <feature.icon className="w-10 h-10 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
@@ -61,7 +61,7 @@ The problem isn’t effort. It’s strategy.</p>
           </div>
 
           {/* Image/Visual */}
-          <div className="relative">
+          <div className="about-visual relative">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
               {/* Background Shape */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl" />

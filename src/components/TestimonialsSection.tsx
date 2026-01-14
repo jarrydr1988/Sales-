@@ -1,6 +1,5 @@
 import { Quote } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import "./TestimonialsScrollAnimation.css";
 
 const TestimonialsSection = () => {
   const testimonials = [{
