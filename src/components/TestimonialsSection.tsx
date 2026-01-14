@@ -1,5 +1,6 @@
 import { Quote } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import "./TestimonialsScrollAnimation.css";
 
 const TestimonialsSection = () => {
   const testimonials = [{
@@ -19,11 +20,18 @@ const TestimonialsSection = () => {
     story: "I was skeptical about personal training, thinking I could figure it out on my own. Boy, was I wrong. The expertise and accountability made all the difference. I've run three marathons since starting, something I never dreamed possible.",
     result: "3 marathons completed"
   }];
+
   const TestimonialCard = ({
-    testimonial
+    testimonial,
+    index
   }: {
     testimonial: typeof testimonials[0];
-  }) => <div className="group relative p-8 md:p-10 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-all duration-500 h-full min-h-[320px] flex flex-col px-[4px] py-[30px]">
+    index: number;
+  }) => (
+    <div 
+      className="testimonial-card group relative p-8 md:p-10 rounded-2xl bg-secondary/30 border border-border hover:border-primary/30 transition-all duration-500 h-full min-h-[320px] flex flex-col"
+      style={{ '--card-index': index } as React.CSSProperties}
+    >
       <Quote className="w-12 h-12 text-primary/30 mb-6 flex-shrink-0" />
       <p className="font-body text-lg text-foreground/90 leading-relaxed mb-8 flex-grow">
         "{testimonial.story}"
@@ -40,9 +48,11 @@ const TestimonialsSection = () => {
           </span>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 
-  return <section id="testimonials" className="py-24 md:py-32 bg-card">
+  return (
+    <section id="testimonials" className="py-24 md:py-32 bg-card">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -64,13 +74,13 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Two Carousel Blocks */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <Carousel opts={{ loop: true }} className="w-full">
+        {/* Two Carousel Blocks with Scroll Animation */}
+        <div className="testimonials-container grid md:grid-cols-2 gap-8">
+          <Carousel opts={{ loop: true }} className="w-full testimonial-carousel testimonial-carousel-1">
             <CarouselContent>
-              {testimonials.map(testimonial => (
+              {testimonials.map((testimonial, index) => (
                 <CarouselItem key={testimonial.name}>
-                  <TestimonialCard testimonial={testimonial} />
+                  <TestimonialCard testimonial={testimonial} index={index} />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -80,11 +90,11 @@ const TestimonialsSection = () => {
             </div>
           </Carousel>
 
-          <Carousel opts={{ loop: true }} className="w-full">
+          <Carousel opts={{ loop: true }} className="w-full testimonial-carousel testimonial-carousel-2">
             <CarouselContent>
-              {testimonials.map(testimonial => (
+              {testimonials.map((testimonial, index) => (
                 <CarouselItem key={testimonial.name}>
-                  <TestimonialCard testimonial={testimonial} />
+                  <TestimonialCard testimonial={testimonial} index={index} />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -95,6 +105,8 @@ const TestimonialsSection = () => {
           </Carousel>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default TestimonialsSection;
