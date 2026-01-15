@@ -1,12 +1,38 @@
 import { Instagram, Youtube, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
 const SocialSection = () => {
   const [email, setEmail] = useState("");
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email submitted:", email);
-    setEmail("");
+    setLoading(true);
+
+    const { error } = await supabase
+      .from('leads')
+      .insert([{ email: email }]);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: error.code === '23505' 
+          ? "This email is already subscribed!" 
+          : error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Success!",
+        description: "You've been added to the community. We'll be in touch!",
+      });
+      setEmail("");
+    }
+    setLoading(false);
   };
   const socialLinks = [{
     icon: Instagram,
@@ -82,8 +108,8 @@ const SocialSection = () => {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" required className="w-full px-6 py-4 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body text-lg" />
-                <Button variant="hero" size="xl" className="w-full" type="submit">
-                  Join the Community
+                <Button variant="hero" size="xl" className="w-full" type="submit" disabled={loading}>
+                  {loading ? "Saving..." : "Join the Community"}
                   <ArrowRight className="ml-2" />
                 </Button>
               </form>
