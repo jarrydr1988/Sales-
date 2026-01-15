@@ -2,9 +2,19 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+// Allowed origins for CORS
+const ALLOWED_ORIGINS = [
+  "https://id-preview--392bbc09-4115-4655-9a37-a54406ac4db8.lovable.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+
+const getCorsHeaders = (origin: string | null) => {
+  const allowedOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    "Access-Control-Allow-Origin": allowedOrigin,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  };
 };
 
 interface MacroRequest {
@@ -18,15 +28,106 @@ interface MacroRequest {
   ebookUrl?: string;
 }
 
+// HTML escape function to prevent XSS
+const escapeHtml = (text: string): string => {
+  const htmlEscapes: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEscapes[char]);
+};
+
+// Input validation
+const validateMacroRequest = (data: unknown): { valid: true; data: MacroRequest } | { valid: false; error: string } => {
+  if (!data || typeof data !== 'object') {
+    return { valid: false, error: 'Invalid request body' };
+  }
+
+  const { email, name, calories, protein, carbs, fats, goal, ebookUrl } = data as Record<string, unknown>;
+
+  if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255) {
+    return { valid: false, error: 'Invalid email address' };
+  }
+
+  if (typeof name !== 'string' || name.trim().length === 0 || name.length > 100) {
+    return { valid: false, error: 'Name must be between 1 and 100 characters' };
+  }
+
+  if (typeof calories !== 'number' || calories < 500 || calories > 10000 || !Number.isInteger(calories)) {
+    return { valid: false, error: 'Calories must be an integer between 500 and 10000' };
+  }
+
+  if (typeof protein !== 'number' || protein < 0 || protein > 1000 || !Number.isInteger(protein)) {
+    return { valid: false, error: 'Protein must be an integer between 0 and 1000' };
+  }
+
+  if (typeof carbs !== 'number' || carbs < 0 || carbs > 1500 || !Number.isInteger(carbs)) {
+    return { valid: false, error: 'Carbs must be an integer between 0 and 1500' };
+  }
+
+  if (typeof fats !== 'number' || fats < 0 || fats > 500 || !Number.isInteger(fats)) {
+    return { valid: false, error: 'Fats must be an integer between 0 and 500' };
+  }
+
+  const validGoals = ['fat-loss', 'muscle-gain', 'maintenance'];
+  if (typeof goal !== 'string' || !validGoals.includes(goal)) {
+    return { valid: false, error: 'Invalid goal type' };
+  }
+
+  // Validate ebookUrl if provided
+  if (ebookUrl !== undefined) {
+    if (typeof ebookUrl !== 'string') {
+      return { valid: false, error: 'Invalid ebook URL' };
+    }
+    // Only allow our own domain for ebook URLs
+    if (!ebookUrl.startsWith('https://id-preview--392bbc09-4115-4655-9a37-a54406ac4db8.lovable.app/')) {
+      return { valid: false, error: 'Invalid ebook URL domain' };
+    }
+  }
+
+  return {
+    valid: true,
+    data: {
+      email: email.trim().toLowerCase(),
+      name: name.trim(),
+      calories,
+      protein,
+      carbs,
+      fats,
+      goal,
+      ebookUrl: ebookUrl as string | undefined,
+    },
+  };
+};
+
 const handler = async (req: Request): Promise<Response> => {
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { email, name, calories, protein, carbs, fats, goal, ebookUrl }: MacroRequest = await req.json();
+    const rawData = await req.json();
+    const validation = validateMacroRequest(rawData);
 
-    console.log("Sending macro results to:", email);
+    if (!validation.valid) {
+      return new Response(
+        JSON.stringify({ error: validation.error }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const { email, name, calories, protein, carbs, fats, goal, ebookUrl } = validation.data;
+
+    // Escape HTML in user inputs
+    const safeName = escapeHtml(name);
+
+    console.log("Processing macro results request for goal:", goal);
 
     const goalLabel = goal === "fat-loss" ? "Fat Loss" : goal === "muscle-gain" ? "Muscle Gain" : "Maintenance";
 
@@ -54,7 +155,7 @@ const handler = async (req: Request): Promise<Response> => {
                 <tr>
                   <td style="padding: 40px;">
                     <h2 style="margin: 0 0 20px; font-family: 'Oswald', Arial, sans-serif; font-size: 24px; color: #f5f5eb;">
-                      Hey ${name}! 👋
+                      Hey ${safeName}! 👋
                     </h2>
                     <p style="margin: 0 0 30px; font-size: 16px; color: #8b8b80; line-height: 1.6;">
                       Here are your personalized macro targets for your <strong style="color: #8B9A5B;">${goalLabel}</strong> goal:
@@ -96,7 +197,7 @@ const handler = async (req: Request): Promise<Response> => {
                       <p style="margin: 0 0 15px; font-size: 14px; color: #8b8b80; line-height: 1.5;">
                         We've included a free ebook with meal ideas to help you hit your macro targets!
                       </p>
-                      <a href="${ebookUrl}" style="display: inline-block; padding: 12px 24px; background-color: #8B9A5B; color: #0d0d0d; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 6px;">
+                      <a href="${escapeHtml(ebookUrl)}" style="display: inline-block; padding: 12px 24px; background-color: #8B9A5B; color: #0d0d0d; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 6px;">
                         Download Ebook
                       </a>
                     </div>
@@ -107,7 +208,7 @@ const handler = async (req: Request): Promise<Response> => {
                       <p style="margin: 0 0 15px; font-size: 14px; color: #8b8b80;">
                         Want personalized coaching to achieve your goals faster?
                       </p>
-                      <a href="https://atlas-strength.lovable.app/#contact" style="display: inline-block; padding: 14px 28px; background-color: #8B9A5B; color: #0d0d0d; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px;">
+                      <a href="https://id-preview--392bbc09-4115-4655-9a37-a54406ac4db8.lovable.app/#contact" style="display: inline-block; padding: 14px 28px; background-color: #8B9A5B; color: #0d0d0d; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px;">
                         Get Started Today
                       </a>
                     </div>
@@ -147,20 +248,21 @@ const handler = async (req: Request): Promise<Response> => {
     if (!res.ok) {
       const errorData = await res.text();
       console.error("Resend API error:", errorData);
-      throw new Error(`Failed to send email: ${errorData}`);
+      throw new Error("Email service error");
     }
 
     const data = await res.json();
-    console.log("Email sent successfully:", data);
+    console.log("Email sent successfully");
 
-    return new Response(JSON.stringify({ success: true, data }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error sending email:", error);
+    // Return generic error message to client
     return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+      JSON.stringify({ success: false, error: "Failed to send email. Please try again later." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
