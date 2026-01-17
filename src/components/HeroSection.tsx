@@ -1,8 +1,9 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-trainer.jpg";
+import RotatingWord from "./RotatingWord";
+
 const HeroSection = () => {
-  return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img src={heroImage} alt="Personal trainer in gym" className="w-full h-full object-cover object-center" />
@@ -28,22 +29,15 @@ const HeroSection = () => {
           <h1 className="hero-heading font-display text-6xl md:text-8xl lg:text-9xl leading-none mb-6 uppercase">
             <span className="text-foreground">Unlock</span>
             <br />
-            <span className="text-gradient">Your Potential</span>
+            <span className="text-foreground">Your </span>
+            <RotatingWord />
           </h1>
 
           {/* Subheading */}
-          <p className="hero-subheading font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-10">If you've lost touch with how strong, fit, and capable your body should feel, you're not alone.
-My coaching is designed for people who demand high performance in their career and want the same from their body.
-
+          <p className="hero-subheading font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-10">
+            If you've lost touch with how strong, fit, and capable your body should feel, you're not alone.
+            My coaching is designed for people who demand high performance in their career and want the same from their body.
           </p>
-
-          {/* CTA Button */}
-          <a href="#contact" className="hero-cta inline-block">
-            <Button variant="hero" size="xl">
-              Get Started
-              <ArrowRight className="ml-2" />
-            </Button>
-          </a>
         </div>
       </div>
 
@@ -53,6 +47,8 @@ My coaching is designed for people who demand high performance in their career a
           <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;
