@@ -52,12 +52,6 @@ const Header = () => {
             )}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button variant="hero" size="default">
-              Join Free
-            </Button>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -93,9 +87,6 @@ const Header = () => {
                   </a>
                 )
               )}
-              <Button variant="hero" size="lg" className="mt-4">
-                Join Free
-              </Button>
             </div>
           </nav>
         )}

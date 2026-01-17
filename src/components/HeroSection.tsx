@@ -1,5 +1,6 @@
 import heroImage from "@/assets/hero-trainer.jpg";
 import RotatingWord from "./RotatingWord";
+import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
   return (
@@ -38,6 +39,13 @@ const HeroSection = () => {
             If you've lost touch with how strong, fit, and capable your body should feel, you're not alone.
             My coaching is designed for people who demand high performance in their career and want the same from their body.
           </p>
+
+          {/* CTA Button */}
+          <a href="#contact">
+            <Button variant="hero" size="lg">
+              Start Your Journey
+            </Button>
+          </a>
         </div>
       </div>
 
