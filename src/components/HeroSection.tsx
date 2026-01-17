@@ -1,6 +1,5 @@
 import heroImage from "@/assets/hero-trainer.jpg";
 import RotatingWord from "./RotatingWord";
-import GlowingRing from "./GlowingRing";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -11,11 +10,6 @@ const HeroSection = () => {
         <img src={heroImage} alt="Personal trainer in gym" className="w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-      </div>
-
-      {/* Glowing Ring Animation */}
-      <div className="absolute inset-0 z-[1]">
-        <GlowingRing />
       </div>
 
       {/* Accent Glow */}
