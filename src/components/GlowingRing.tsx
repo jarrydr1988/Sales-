@@ -27,7 +27,7 @@ const GlowingRing = () => {
       const height = canvas.offsetHeight;
       const centerX = width / 2;
       const centerY = height / 2;
-      const radius = Math.min(width, height) * 0.42;
+      const radius = Math.min(width, height) * 0.35;
 
       ctx.clearRect(0, 0, width, height);
 
