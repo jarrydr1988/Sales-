@@ -2,19 +2,10 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
-// Allowed origins for CORS
-const ALLOWED_ORIGINS = [
-  "https://id-preview--392bbc09-4115-4655-9a37-a54406ac4db8.lovable.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-];
-
-const getCorsHeaders = (origin: string | null) => {
-  const allowedOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
-  return {
-    "Access-Control-Allow-Origin": allowedOrigin,
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  };
+// CORS headers - allow all origins for this public form
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 interface ContactRequest {
@@ -101,8 +92,9 @@ const sendEmail = async (to: string[], from: string, subject: string, html: stri
 };
 
 const handler = async (req: Request): Promise<Response> => {
-  const origin = req.headers.get("origin");
-  const corsHeaders = getCorsHeaders(origin);
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
 
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
