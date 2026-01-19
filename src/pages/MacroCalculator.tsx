@@ -9,17 +9,20 @@ import AtlasLogo from "@/components/AtlasLogo";
 import MacroNutritionContent from "@/components/MacroNutritionContent";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+
 type Gender = "male" | "female";
-type Goal = "fat-loss" | "muscle-gain" | "maintain";
+type Goal = "fat-loss" | "muscle-gain" | "maintenance";
 type WeightUnit = "kg" | "lbs";
 type HeightUnit = "cm" | "inches";
 type ActivityLevel = "sedentary" | "somewhat-active" | "active" | "very-active";
+
 interface MacroResults {
   calories: number;
   protein: number;
   carbs: number;
   fats: number;
 }
+
 const MacroCalculator = () => {
   const calculatorRef = useRef<HTMLDivElement>(null);
   
@@ -27,6 +30,7 @@ const MacroCalculator = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const [gender, setGender] = useState<Gender | "">("");
   const [goal, setGoal] = useState<Goal | "">("");
   const [weight, setWeight] = useState("");
@@ -50,20 +54,25 @@ const MacroCalculator = () => {
     active: 1.55,
     "very-active": 1.725
   };
+
   const calculateMacros = (): MacroResults | null => {
     if (!gender || !goal || !weight || !height || !age || !activityLevel) {
       return null;
     }
+
     const weightKg = weightUnit === "lbs" ? parseFloat(weight) * 0.453592 : parseFloat(weight);
     const heightCm = heightUnit === "inches" ? parseFloat(height) * 2.54 : parseFloat(height);
     const ageNum = parseFloat(age);
+
     let bmr: number;
     if (gender === "male") {
       bmr = 10 * weightKg + 6.25 * heightCm - 5 * ageNum + 5;
     } else {
       bmr = 10 * weightKg + 6.25 * heightCm - 5 * ageNum - 161;
     }
+
     const tdee = bmr * activityMultipliers[activityLevel];
+
     let calories: number;
     switch (goal) {
       case "fat-loss":
@@ -75,6 +84,7 @@ const MacroCalculator = () => {
       default:
         calories = tdee;
     }
+
     let proteinMultiplier: number;
     let fatPercentage: number;
     switch (goal) {
@@ -90,10 +100,12 @@ const MacroCalculator = () => {
         proteinMultiplier = 1.8;
         fatPercentage = 0.30;
     }
+
     const protein = Math.round(weightKg * proteinMultiplier);
     const fats = Math.round(calories * fatPercentage / 9);
     const carbCalories = calories - protein * 4 - fats * 9;
     const carbs = Math.round(carbCalories / 4);
+
     return {
       calories: Math.round(calories),
       protein,
@@ -101,6 +113,7 @@ const MacroCalculator = () => {
       fats
     };
   };
+
   const handleSubmit = async () => {
     if (!email || !name) {
       toast.error("Please enter your name and email");
@@ -111,14 +124,15 @@ const MacroCalculator = () => {
       toast.error("Please enter a valid email address");
       return;
     }
+
     const results = calculateMacros();
     if (!results) {
       toast.error("Please fill in all fields");
       return;
     }
+
     setIsLoading(true);
     try {
-      const ebookUrl = `${window.location.origin}/ebook/macro-guide.pdf`;
       const {
         data,
         error
@@ -130,8 +144,7 @@ const MacroCalculator = () => {
           protein: results.protein,
           carbs: results.carbs,
           fats: results.fats,
-          goal,
-          ebookUrl
+          goal
         }
       });
       if (error) throw error;
@@ -139,13 +152,19 @@ const MacroCalculator = () => {
       toast.success("Your macro results have been sent to your email!");
     } catch (error: any) {
       console.error("Error sending email:", error);
-      toast.error("Failed to send email. Please try again.");
+      // The error object from Supabase invoke contains a `context` property
+      // which holds the actual JSON response from the function.
+      const functionError = error.context?.error || "An unknown error occurred.";
+      toast.error(`Failed to send email: ${functionError}`);
     } finally {
       setIsLoading(false);
     }
   };
+
   const isFormValid = gender && goal && weight && height && age && activityLevel && email && name;
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
         <div className="container mx-auto px-6 py-4">
@@ -223,7 +242,8 @@ const MacroCalculator = () => {
             </p>
           </div>
 
-          {emailSent ? <div className="bg-card border border-primary/30 rounded-lg p-8 md:p-12 text-center animate-fade-in">
+          {emailSent ? (
+            <div className="bg-card border border-primary/30 rounded-lg p-8 md:p-12 text-center animate-fade-in">
               <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Mail className="w-8 h-8 text-primary" />
               </div>
@@ -240,7 +260,9 @@ const MacroCalculator = () => {
           }}>
                 Calculate Again
               </Button>
-            </div> : <div className="calculator-form bg-card border border-border rounded-lg p-6 md:p-8 space-y-6">
+            </div>
+          ) : (
+            <div className="calculator-form bg-card border border-border rounded-lg p-6 md:p-8 space-y-6">
               {/* Name */}
               <div className="space-y-2">
                 <Label className="text-foreground font-display tracking-wider">Your Name</Label>
@@ -286,7 +308,7 @@ const MacroCalculator = () => {
                   <SelectContent>
                     <SelectItem value="fat-loss">Fat Loss</SelectItem>
                     <SelectItem value="muscle-gain">Muscle Gain</SelectItem>
-                    <SelectItem value="maintain">Maintain</SelectItem>
+                    <SelectItem value="maintenance">Maintain</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -343,13 +365,17 @@ const MacroCalculator = () => {
 
               {/* Calculate Button */}
               <Button variant="hero" size="xl" className="w-full mt-4 gap-2" onClick={handleSubmit} disabled={!isFormValid || isLoading}>
-                {isLoading ? <>
+                {isLoading ? (
+                  <>
                     <Loader2 className="w-5 h-5 animate-spin" />
                     Sending...
-                  </> : <>
+                  </>
+                ) : (
+                  <>
                     <Mail className="w-5 h-5" />
                     Get My Results
-                  </>}
+                  </>
+                )}
               </Button>
 
               <p className="text-center text-muted-foreground text-xs font-body">
@@ -382,7 +408,8 @@ const MacroCalculator = () => {
                   No spam. No nonsense. Just useful information.
                 </p>
               </div>
-            </div>}
+            </div>
+          )}
         </div>
 
         {/* Nutrition Content Section */}
@@ -390,6 +417,8 @@ const MacroCalculator = () => {
           <MacroNutritionContent onScrollToCalculator={scrollToCalculator} />
         </div>
       </main>
-    </div>;
+    </div>
+  );
 };
+
 export default MacroCalculator;

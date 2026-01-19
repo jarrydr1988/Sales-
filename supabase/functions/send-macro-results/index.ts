@@ -28,7 +28,7 @@ const escapeHtml = (text: string): string => {
     '"': '&quot;',
     "'": '&#39;',
   };
-  return text.replace(/[&<>"']/g, (char) => htmlEscapes[char]);
+  return text.replace(/[&<>\"']/g, (char) => htmlEscapes[char]);
 };
 
 // Input validation
@@ -37,7 +37,12 @@ const validateMacroRequest = (data: unknown): { valid: true; data: MacroRequest 
     return { valid: false, error: 'Invalid request body' };
   }
 
-  const { email, name, calories, protein, carbs, fats, goal, ebookUrl } = data as Record<string, unknown>;
+  const { email, name, goal, ebookUrl } = data as Record<string, unknown>;
+  
+  const calories = Number( (data as any).calories);
+  const protein = Number( (data as any).protein);
+  const carbs = Number( (data as any).carbs);
+  const fats = Number( (data as any).fats);
 
   if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255) {
     return { valid: false, error: 'Invalid email address' };
@@ -47,20 +52,20 @@ const validateMacroRequest = (data: unknown): { valid: true; data: MacroRequest 
     return { valid: false, error: 'Name must be between 1 and 100 characters' };
   }
 
-  if (typeof calories !== 'number' || calories < 500 || calories > 10000 || !Number.isInteger(calories)) {
-    return { valid: false, error: 'Calories must be an integer between 500 and 10000' };
+  if (isNaN(calories) || calories < 500 || calories > 10000) {
+    return { valid: false, error: 'Calories must be a number between 500 and 10000' };
   }
 
-  if (typeof protein !== 'number' || protein < 0 || protein > 1000 || !Number.isInteger(protein)) {
-    return { valid: false, error: 'Protein must be an integer between 0 and 1000' };
+  if (isNaN(protein) || protein < 0 || protein > 1000) {
+    return { valid: false, error: 'Protein must be a number between 0 and 1000' };
   }
 
-  if (typeof carbs !== 'number' || carbs < 0 || carbs > 1500 || !Number.isInteger(carbs)) {
-    return { valid: false, error: 'Carbs must be an integer between 0 and 1500' };
+  if (isNaN(carbs) || carbs < 0 || carbs > 1500) {
+    return { valid: false, error: 'Carbs must be a number between 0 and 1500' };
   }
 
-  if (typeof fats !== 'number' || fats < 0 || fats > 500 || !Number.isInteger(fats)) {
-    return { valid: false, error: 'Fats must be an integer between 0 and 500' };
+  if (isNaN(fats) || fats < 0 || fats > 500) {
+    return { valid: false, error: 'Fats must be a number between 0 and 500' };
   }
 
   const validGoals = ['fat-loss', 'muscle-gain', 'maintenance'];
@@ -89,10 +94,10 @@ const validateMacroRequest = (data: unknown): { valid: true; data: MacroRequest 
     data: {
       email: email.trim().toLowerCase(),
       name: name.trim(),
-      calories,
-      protein,
-      carbs,
-      fats,
+      calories: Math.round(calories),
+      protein: Math.round(protein),
+      carbs: Math.round(carbs),
+      fats: Math.round(fats),
       goal,
       ebookUrl: ebookUrl as string | undefined,
     },
@@ -100,10 +105,6 @@ const validateMacroRequest = (data: unknown): { valid: true; data: MacroRequest 
 };
 
 const handler = async (req: Request): Promise<Response> => {
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
-
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }

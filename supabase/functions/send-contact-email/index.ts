@@ -24,7 +24,7 @@ const escapeHtml = (text: string): string => {
     '"': '&quot;',
     "'": '&#39;',
   };
-  return text.replace(/[&<>"']/g, (char) => htmlEscapes[char]);
+  return text.replace(/[&<>\"\']/g, (char) => htmlEscapes[char]);
 };
 
 // Input validation
@@ -74,6 +74,7 @@ const getInquiryLabel = (type: string): string => {
 };
 
 const sendEmail = async (to: string[], from: string, subject: string, html: string) => {
+  console.log("Sending email to:", to, "from:", from);
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -82,20 +83,17 @@ const sendEmail = async (to: string[], from: string, subject: string, html: stri
     },
     body: JSON.stringify({ from, to, subject, html }),
   });
-  
+
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error(`Failed to send email: ${error}`);
+    const errorBody = await res.text();
+    console.error(`Failed to send email. Status: ${res.status}, Body: ${errorBody}`);
+    throw new Error(`Failed to send email: ${errorBody}`);
   }
-  
+
   return res.json();
 };
 
 const handler = async (req: Request): Promise<Response> => {
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
-
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -113,7 +111,6 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { name, email, inquiryType, message } = validation.data;
 
-    // Escape HTML in user inputs to prevent XSS in emails
     const safeName = escapeHtml(name);
     const safeMessage = escapeHtml(message);
     const safeInquiryLabel = escapeHtml(getInquiryLabel(inquiryType));
@@ -121,7 +118,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Processing contact form submission for inquiry type:", inquiryType);
 
     // Send confirmation email to the user
-    const userEmailResponse = await sendEmail(
+    await sendEmail(
       [email],
       "Atlas Performance <onboarding@resend.dev>",
       "We've Received Your Message - Atlas Performance",
@@ -149,7 +146,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("User confirmation email sent successfully");
 
     // Send notification email to the business
-    const notificationEmailResponse = await sendEmail(
+    await sendEmail(
       ["jarrydr78@gmail.com"],
       "Atlas Performance Website <onboarding@resend.dev>",
       `New Contact Form Submission: ${safeInquiryLabel}`,
@@ -188,8 +185,7 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
   } catch (error: unknown) {
-    console.error("Error in send-contact-email function:", error);
-    // Return generic error message to client
+    console.error("Error in send-contact-email function:", error instanceof Error ? error.message : String(error));
     return new Response(
       JSON.stringify({ error: "Failed to send message. Please try again later." }),
       {
