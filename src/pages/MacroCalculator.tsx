@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import AtlasLogo from "@/components/AtlasLogo";
 import MacroNutritionContent from "@/components/MacroNutritionContent";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
