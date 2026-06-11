@@ -1,19 +1,59 @@
-import { PlayCircle, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { PlayCircle, ShieldCheck, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const SalesPage = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSelectPlan = (planTitle: string) => {
     setSelectedPlan(planTitle);
     document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email) {
+      toast.error("Please fill in your name and email.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const message = `Chosen Plan: ${selectedPlan || "None selected"}\n\nGoals / Notes:\n${notes || "No notes provided"}`;
+      
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name,
+          email,
+          inquiryType: "online",
+          message,
+        },
+      });
+
+      if (error) throw error;
+
+      toast.success("Info request submitted successfully! Check your inbox.");
+      // Reset form
+      setName("");
+      setEmail("");
+      setNotes("");
+      setSelectedPlan("");
+    } catch (error: any) {
+      console.error("Error sending contact email:", error);
+      const functionError = error.context?.error || "An unknown error occurred.";
+      toast.error(`Failed to submit: ${functionError}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -152,16 +192,17 @@ const SalesPage = () => {
             <div className="absolute top-0 right-0 p-32 bg-emerald-500/10 blur-[100px] opacity-60 rounded-full" />
             <div className="relative space-y-6">
               <h4 className="text-2xl font-semibold text-white text-center mb-4">Sign Up For More Information</h4>
-              <form onSubmit={(e) => { e.preventDefault(); }} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-slate-400">Your Name</label>
                   <input
                     type="text"
                     required
+                    disabled={isLoading}
                     placeholder="John Doe"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full h-12 bg-slate-950 border border-slate-800 rounded-xl px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-medium"
+                    className="w-full h-12 bg-slate-950 border border-slate-800 rounded-xl px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-medium disabled:opacity-50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -169,10 +210,11 @@ const SalesPage = () => {
                   <input
                     type="email"
                     required
+                    disabled={isLoading}
                     placeholder="you@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full h-12 bg-slate-950 border border-slate-800 rounded-xl px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-medium"
+                    className="w-full h-12 bg-slate-950 border border-slate-800 rounded-xl px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-medium disabled:opacity-50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -190,13 +232,23 @@ const SalesPage = () => {
                   <textarea
                     placeholder="Tell us about your fitness goals, injuries, or questions..."
                     value={notes}
+                    disabled={isLoading}
                     onChange={(e) => setNotes(e.target.value)}
                     rows={4}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-medium resize-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-medium resize-none disabled:opacity-50"
                   />
                 </div>
-                <Button type="submit" className="w-full h-14 text-base font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 transition-all active:scale-95">
-                  Get More Info →
+                <Button type="submit" disabled={isLoading} className="w-full h-14 text-base font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      Get More Info →
+                    </>
+                  )}
                 </Button>
               </form>
               <p className="text-center text-xs text-slate-500 font-medium">
