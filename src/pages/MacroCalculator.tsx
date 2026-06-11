@@ -172,7 +172,6 @@ const MacroCalculator = () => {
             <div className="w-8 h-8 rounded bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center">
               <span className="font-black text-lg text-slate-950">A</span>
             </div>
-            Atlas Strength Output
           </Link>
           <Link to="/">
             <Button variant="outline" size="sm" className="gap-2 border-slate-800 bg-slate-900/50 text-slate-300 hover:bg-slate-800 hover:text-white">

@@ -21,12 +21,11 @@ const SalesPage = () => {
       {/* A. Top Bar */}
       <header className="fixed top-0 w-full glass z-50 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+          <Link to="/" className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
             <div className="w-8 h-8 rounded bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center">
               <span className="font-black text-lg text-slate-950">A</span>
             </div>
-            Atlas Strength Output
-          </div>
+          </Link>
           <div className="text-sm font-semibold tracking-wider text-slate-300 uppercase">
             Atlas Strength & Performance
           </div>
