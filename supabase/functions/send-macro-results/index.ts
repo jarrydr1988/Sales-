@@ -236,7 +236,7 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Atlas Strength & Performance <onboarding@resend.dev>",
+        from: "Atlas Strength & Performance <jarryd@atlasstrengthandperformance.com>",
         to: [email],
         subject: "Your Personalized Macro Targets - Atlas Strength & Performance",
         html: emailHtml,
