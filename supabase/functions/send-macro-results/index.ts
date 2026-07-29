@@ -189,13 +189,13 @@ const handler = async (req: Request): Promise<Response> => {
                     <!-- Ebook Section -->
                     <div style="margin-top: 30px; padding: 25px; background-color: #1a1a1a; border-radius: 8px; border-left: 4px solid #8B9A5B;">
                       <h3 style="margin: 0 0 10px; font-family: 'Oswald', Arial, sans-serif; font-size: 18px; color: #f5f5eb;">
-                        🎁 BONUS: Meal Ideas Ebook
+                        🎁 BONUS: Deadlift Variations Guide
                       </h3>
                       <p style="margin: 0 0 15px; font-size: 14px; color: #8b8b80; line-height: 1.5;">
-                        We've included a free ebook with meal ideas to help you hit your macro targets!
+                        We've included a free guide with deadlift variations and when to use them to help you build muscle!
                       </p>
-                      <a href="https://www.atlasstrengthandperformance.com/ebook/macro-guide.pdf" style="display: inline-block; padding: 12px 24px; background-color: #8B9A5B; color: #0d0d0d; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 6px;">
-                        Download Ebook
+                      <a href="https://www.atlasstrengthandperformance.com/ebook/deadlift-variations.pdf" style="display: inline-block; padding: 12px 24px; background-color: #8B9A5B; color: #0d0d0d; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 6px;">
+                        Download Guide
                       </a>
                     </div>
                     

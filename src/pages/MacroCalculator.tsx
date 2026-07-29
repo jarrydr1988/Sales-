@@ -246,7 +246,7 @@ const MacroCalculator = () => {
                   CHECK YOUR <span className="text-emerald-400">INBOX!</span>
                 </h2>
                 <p className="text-slate-400 font-sans mb-6">
-                  We've sent your personalized macro targets and a free meal ideas ebook to <strong className="text-white">{email}</strong>
+                  We've sent your personalized macro targets and a free deadlift variations guide to <strong className="text-white">{email}</strong>
                 </p>
                 <Button variant="outline" className="border-slate-700 hover:bg-slate-800 hover:text-white text-slate-300 rounded-xl" onClick={() => {
                   setEmailSent(false);
@@ -377,7 +377,7 @@ const MacroCalculator = () => {
                 </Button>
 
                 <p className="text-center text-slate-500 text-xs font-sans">
-                  By submitting, you'll receive your personalized macro targets and a free meal ideas ebook via email.
+                  By submitting, you'll receive your personalized macro targets and a free deadlift variations guide via email.
                 </p>
 
                 {/* Email Benefits Section */}
